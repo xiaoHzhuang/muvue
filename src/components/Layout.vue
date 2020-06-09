@@ -89,5 +89,6 @@ body,
   top: 60px;
   right: 0;
   left: 0px;
+  bottom:0px;
 }
 </style>

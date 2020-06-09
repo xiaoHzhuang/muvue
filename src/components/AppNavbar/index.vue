@@ -55,12 +55,12 @@ export default {
   overflow-x: hidden;
   .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
-    @extend %h100;
     overflow-y: scroll;
     overflow-x: hidden;
   }
   .el-menu {
     flex: 1;
+    margin-top:60px;
     overflow: inherit;
     border-right: none;
     &::-webkit-scrollbar {
