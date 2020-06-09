@@ -9,6 +9,7 @@
       text-color="#fff"
       active-text-color="#ffd04b"
       :collapse-transition="false"
+      :unique-opened="true"
     >
       <el-menu-item index="/home">
         <i class="el-icon-s-menu"></i>
@@ -18,15 +19,15 @@
         <i class="el-icon-user-solid"></i>
         <span slot="title">会员管理</span>
       </el-menu-item>
-      <el-menu-item index="/supplier/">
+      <el-menu-item index="/supplier">
         <i class="el-icon-s-cooperation"></i>
         <span slot="title">供应商管理</span>
       </el-menu-item>
-      <el-menu-item index="/goods/">
+      <el-menu-item index="/goods">
         <i class="el-icon-s-goods"></i>
         <span slot="title">商品管理</span>
       </el-menu-item>
-      <el-menu-item index="/staff/">
+      <el-menu-item index="/staff">
         <i class="el-icon-user"></i>
         <span slot="title">员工管理</span>
       </el-menu-item>
@@ -37,12 +38,27 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
 
   components: {},
-
-  methods: {}
+  watch: {
+    // 监听浏览器直接输入路由，将此路由添加到tabnavBox
+    "$route.path": function(val) {
+      this.selectmenu(val);
+    }
+  },
+  methods: {
+    selectmenu(key) {
+      let title = this.$route.name;
+      let path=this.$route.path;
+      this.$store.dispatch("addTab", {
+        title: title,
+        path: path
+      });
+    }
+  }
 };
 </script>
 
@@ -55,12 +71,12 @@ export default {
   overflow-x: hidden;
   .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
-    @extend %h100;
     overflow-y: scroll;
     overflow-x: hidden;
   }
   .el-menu {
     flex: 1;
+    margin-top: 60px;
     overflow: inherit;
     border-right: none;
     &::-webkit-scrollbar {
