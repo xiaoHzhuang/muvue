@@ -1,5 +1,8 @@
 <template>
-  <div class="header">
+  <el-header class="appHeader">
+    <span class="hideAside" @click="collapse">
+      <i class="el-icon-menu"></i>
+    </span>
     <a href="#/">
       <img class="logo" src="@/assets/logo.png" width="25px" />
       <span class="company">管理系统</span>
@@ -14,41 +17,41 @@
         <el-dropdown-item command="b">退出系统</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-  </div>
+  </el-header>
 </template>
 
 <script>
-import {logOut} from '@/api/login'
+import { logOut } from "@/api/login";
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
 
   components: {},
 
   methods: {
+    collapse() {
+      this.$store.dispatch("collapse");
+    },
     handleCommand(command) {
       this.$message("click ont item" + command);
       switch (command) {
         case "a":
-
           break;
         case "b":
-          logOut(localStorage.getItem('my-vue-token')).then(response=>{
-            const resp=response.data;
-            if(resp.flag){
-              localStorage.removeItem('my-vue-token');
-              localStorage.removeItem('my-vue-user');
-              this.$router.push('/login');
-            }else{
-               this.$message({  
-                message: "注销失败了",
+          logOut(localStorage.getItem("my-vue-token")).then(response => {
+            const resp = response.data;
+            if (resp.flag) {
+              localStorage.removeItem("my-vue-token");
+              localStorage.removeItem("my-vue-user");
+              this.$router.push("/login");
+            } else {
+              this.$message({
+                message: "注销失败",
                 type: "warning"
               });
             }
-          })
+          });
           break;
         default:
           break;
@@ -63,10 +66,6 @@ export default {
   vertical-align: middle;
   padding: 0 10px 0 40px;
 }
-.company {
-  position: absolute;
-  color: white;
-}
 .el-dropdown {
   float: right;
   margin-right: 40px;
@@ -74,5 +73,8 @@ export default {
 .el-dropdown-link {
   cursor: pointer;
   color: #fff;
+}
+.hideAside {
+  cursor: pointer;
 }
 </style>

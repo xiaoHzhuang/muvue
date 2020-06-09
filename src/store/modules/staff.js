@@ -1,38 +1,38 @@
-const state={
-    count:1
+const state = {
+    count: 1
 }
 
-const getters={
-    desc(state){
-        if(state.count<50){
+const getters = {
+    desc(state) {
+        if (state.count < 50) {
             return '吃饭';
-        }else if(state.count<100){
+        } else if (state.count < 100) {
             return '睡觉';
-        }else{
+        } else {
             return '打游戏';
         }
     }
 }
 
-const mutations={
-    increment(state,n){
-        state.count+=n;
+const mutations = {
+    increment(state, n) {
+        state.count += n;
     },
-    decrement(state){
+    decrement(state) {
         state.count--;
     }
 }
 
-const actions={
-    add(context){
-        context.commit('increment',10)
+const actions = {
+    add(context) {
+        context.commit('increment', 10)
     },
-    decrement({commit,state}){
+    decrement({ commit, state }) {
         commit('decrement');
     }
 }
 
-export default{
+export default {
     state,
     getters,
     mutations,

@@ -3,10 +3,12 @@
     <el-menu
       :router="true"
       :default-active="$route.path"
-      class="el-menu-vertical-demo"
+      class="el-menu-vertical"
+      :collapse="$store.getters.isCollapse"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      :collapse-transition="false"
     >
       <el-menu-item index="/home">
         <i class="el-icon-s-menu"></i>
@@ -24,7 +26,7 @@
         <i class="el-icon-s-goods"></i>
         <span slot="title">商品管理</span>
       </el-menu-item>
-       <el-menu-item index="/staff/">
+      <el-menu-item index="/staff/">
         <i class="el-icon-user"></i>
         <span slot="title">员工管理</span>
       </el-menu-item>
@@ -44,8 +46,47 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-menu{
-  border-right:none;
+<style scoped lang="scss">
+%h100 {
+  height: 100%;
+}
+
+.navBar {
+  overflow-x: hidden;
+  .el-menu-vertical:not(.el-menu--collapse) {
+    width: 200px;
+    @extend %h100;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .el-menu {
+    flex: 1;
+    overflow: inherit;
+    border-right: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .fa {
+      vertical-align: middle;
+      margin-right: 5px;
+      width: 24px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .el-menu-item {
+      &:hover {
+        color: #ffffff !important;
+        background-color: #375573 !important;
+      }
+    }
+    .el-menu-item.is-active {
+      background-color: #56a9ff !important;
+    }
+    .is-opened > .el-submenu__title > .el-icon-arrow-down {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
 }
 </style>

@@ -1,11 +1,13 @@
 <template>
   <div id="layout">
     <el-container>
-       <app-navbar></app-navbar>
-       <el-container>
-          <app-header></app-header>
+      <app-navbar></app-navbar>
+      <el-container class="container">
+        <app-header></app-header>
+        <transition name="main" mode="out-in">
           <app-main></app-main>
-       </el-container>
+        </transition>
+      </el-container>
     </el-container>
   </div>
 </template>
@@ -19,47 +21,73 @@ export default {
     return {};
   },
   components: { AppHeader, AppMain, AppNavbar },
-  methods: {
-  }
+  methods: {}
 };
 </script>
-
-<style scoped>
-
- * {
-    margin: 0px;
-    padding: 0px;
-  }
- body {
-    background-color: #f2f2f2;
-    font-size: 14px;
-    color: #333333;
-  }
-.header {
+<style>
+.main-enter,
+.main-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.main-enter-active {
+  transition: all 0.2s;
+}
+.main-leave-active {
   position: absolute;
-  line-height: 50px;
-  top: 0px;
-  left: 230px;
-  right: 0px;
+  transition: all 0.3s;
+}
+</style>
+<style scoped  lang="scss">
+%h100 {
+  height: 100%;
+}
+%w100 {
+  width: 100%;
+}
+* {
+  margin: 0px;
   padding: 0px;
-  background-color: #2d3a4b;
+}
+body {
+  background-color: #f2f2f2;
+  font-size: 14px;
+  color: #333333;
+  @extend %h100;
+  @extend %w100;
+}
+
+html,
+body,
+#layout,
+.el-container {
+  @extend %h100;
+  @extend %w100;
 }
 .navBar {
-  position: absolute;
-  width: 230px;
+  width: auto !important;
   top: 0px;
   left: 0px;
   bottom: 0px;
+  height: 100%;
   overflow-y: auto;
   background-color: #545c64;
 }
+.container {
+  position: relative;
+}
+
+.appHeader {
+  line-height: 60px;
+  background-color: #545c64;
+  height: 60px;
+  width: 100%;
+}
+
 .appMain {
   position: absolute;
-  top: 50px;
-  left: 230px;
-  right: 0px;
-  bottom: 0px;
-  padding: 10px;
-  overflow-y: auto;
+  top: 60px;
+  right: 0;
+  left: 0px;
 }
 </style>

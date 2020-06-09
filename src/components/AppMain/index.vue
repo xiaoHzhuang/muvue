@@ -1,22 +1,21 @@
 <template>
-  <div class="appMain">
+  <el-main class="appMain">
     <app-link></app-link>
     <router-view></router-view>
-  </div>
+  </el-main>
 </template>
 
 <script>
- import AppLink from '@/views/applink'
- export default {
-  data () {
-    return {
-    }
+import AppLink from "@/views/applink";
+export default {
+  data() {
+    return {};
   },
 
-  components: {AppLink},
+  components: { AppLink },
 
   methods: {}
-}
+};
 </script>
 
 <style scoped>

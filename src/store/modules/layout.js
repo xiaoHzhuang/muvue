@@ -3,11 +3,11 @@ const state = {
     logoShow: false,
 }
 
-const getters={
-    isCollapse(state){
+const getters = {
+    isCollapse(state) {
         return state.isCollapse;
     },
-    logoShow(state){
+    logoShow(state) {
         return state.logoShow;
     }
 }
