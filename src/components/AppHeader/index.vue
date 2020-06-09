@@ -43,8 +43,8 @@ export default {
               localStorage.removeItem('my-vue-user');
               this.$router.push('/login');
             }else{
-               this.$message({
-                message: "注销失败",
+               this.$message({  
+                message: "注销失败了",
                 type: "warning"
               });
             }
