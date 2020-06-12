@@ -40,6 +40,7 @@ export default {
         if (valid) {
           this.$store.dispatch('Login',this.form).then(response=>{
             if(response.flag){
+               this.$store.dispatch('initRoutes');
                this.$router.push("/home");
             }else{
                this.$message({

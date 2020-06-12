@@ -131,7 +131,7 @@ export default {
         payType:null,
         birthday:null
       },
-      tableHeight: window.innerHeight - 213,
+      tableHeight: window.innerHeight -200,
       payTypeOptions: payTypeOptions,
       dialogFormVisible: false,
       memberForm: {
@@ -161,7 +161,7 @@ export default {
   mounted() {
     window.onresize = () => {
       return (() => {
-        let heightStyle = window.innerHeight - 213;
+        let heightStyle = window.innerHeight - 200;
         this.tableHeight = heightStyle;
       })();
     };

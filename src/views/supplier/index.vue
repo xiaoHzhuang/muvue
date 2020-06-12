@@ -82,7 +82,7 @@ export default {
         contactPerson:"",
         phone:""
       },
-      tableHeight: window.innerHeight - 213,
+      tableHeight: window.innerHeight - 200,
       dialogFormVisible: false,
       supplierForm: {
         id: null,
@@ -111,7 +111,7 @@ export default {
   mounted() {
     window.onresize = () => {
       return (() => {
-        let heightStyle = window.innerHeight - 213;
+        let heightStyle = window.innerHeight - 200;
         this.tableHeight = heightStyle;
       })();
     };

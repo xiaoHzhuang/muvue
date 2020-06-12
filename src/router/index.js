@@ -9,68 +9,127 @@ import Supplier from "@/views/supplier"
 import Goods from "@/views/goods"
 Vue.use(VueRouter);
 
-const routes = [
+const defaultRouter = [
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
   {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
+    hidden: true,
+    children: []
   },
   {
     path: "/",
-    name: "layout",
+    name: "",
     component: Layout,
     redirect: "/login",
+    alone:true,
     children: [
       {
         path: "/login",
         name: "login",
-        component: Login
-      },
+        component: Login,
+        hidden: true,
+        children: []
+      }]
+  },
+  {
+    path: "/",
+    name: "",
+    component: Layout,
+    alone:true,
+    children: [
       {
         path: "/home",
-        name: "home",
+        name: "首页",
         component: Home,
-        meta:{title:"首页"}
+        iconCls: 'el-icon-s-menu',
+        meta: { title: "首页" },
+        children: []
       },
+    ]
+  },
+  {
+    path: "/",
+    name: "",
+    component: Layout,
+    alone:true,
+    children: [
       {
         path: "/staff",
-        name: "staff",
+        name: "员工管理",
         component: Staff,
-        meta:{title:"员工管理"}
-      },
-      {
-        path: "/supplier",
-        name: "supplier",
-        component: Supplier,
-        meta:{title:"供应商管理"}
-      }, 
-      {
-        path: "/goods",
-        name: "goods",
-        component: Goods,
-        meta:{title:"商品管理"}
+        iconCls: 'el-icon-user',
+        meta: { title: "员工管理" },
+        children: []
       }
     ]
   },
   {
-    path: "/member",
-    name: "layout_member",
+    path: "/",
+    name: "",
     component: Layout,
+    alone:true,
     children: [
       {
-        path: "/",
-        name: "member",
-        component: Member,
-        meta:{title:"会员管理"}
+        path: "/supplier",
+        name: "供应商管理",
+        component: Supplier,
+        iconCls: 'el-icon-s-cooperation',
+        meta: { title: "供应商管理" },
+        children: []
       }
     ]
   },
+  {
+    path: "/",
+    name: "",
+    component: Layout,
+    alone:true,
+    children: [
+      {
+        path: "/goods",
+        name: "商品管理",
+        component: Goods,
+        iconCls: 'el-icon-s-goods',
+        meta: { title: "商品管理" },
+        children: []
+      }
+    ]
+  },
+  {
+    path: "/",
+    name: "",
+    component: Layout,
+    alone:true,
+    children: [  
+      {
+        path: "/member",
+        name: "会员管理",
+        component: Member,
+        iconCls: 'el-icon-user-solid',
+        meta: { title: "会员管理" },
+        children: []
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes: defaultRouter
 });
 
 export default router;
+export { defaultRouter }

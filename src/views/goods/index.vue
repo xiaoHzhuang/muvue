@@ -107,7 +107,7 @@ export default {
       total: 0,
       currentPage: 1,
       pageSize: 10,
-      tableHeight: window.innerHeight - 213,
+      tableHeight: window.innerHeight - 200,
       dialogFormVisible: false,
       rules: {},
       goodsForm:{
@@ -140,7 +140,7 @@ export default {
   mounted() {
     window.onresize = () => {
       return (() => {
-        let heightStyle = window.innerHeight - 213;
+        let heightStyle = window.innerHeight - 200;
         this.tableHeight = heightStyle;
       })();
     };
