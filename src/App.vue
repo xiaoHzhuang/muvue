@@ -26,6 +26,7 @@ body {
 }
 a{
   color: #56a9ff;
+  text-decoration:none;
 }
 .fade-enter-active,
 .fade-leave-active {

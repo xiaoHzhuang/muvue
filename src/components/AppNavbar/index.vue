@@ -51,8 +51,9 @@ export default {
   },
   methods: {
     selectmenu(key) {
-      let title = this.$route.name;
+      let title = this.$route.meta.title;
       let path=this.$route.path;
+      console.log(this.$route);
       this.$store.dispatch("addTab", {
         title: title,
         path: path
