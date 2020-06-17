@@ -34,14 +34,13 @@ export default {
       this.$store.dispatch("collapse");
     },
     handleCommand(command) {
-      this.$message("click ont item" + command);
       switch (command) {
         case "a":
           break;
         case "b":
           logOut(localStorage.getItem("my-vue-token")).then(response => {
             const resp = response.data;
-            if (resp.flag) {
+            if (resp.status==401) {
               localStorage.removeItem("my-vue-token");
               localStorage.removeItem("my-vue-user");
               this.$router.push("/login");

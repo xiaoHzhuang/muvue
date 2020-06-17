@@ -7,6 +7,7 @@ import Member from "@/views/member"
 import Staff from "@/views/staff"
 import Supplier from "@/views/supplier"
 import Goods from "@/views/goods"
+
 Vue.use(VueRouter);
 
 const defaultRouter = [
@@ -23,7 +24,7 @@ const defaultRouter = [
   },
   {
     path: "/login",
-    name: "login",
+    name: "登录",
     component: Login,
     hidden: true,
     children: []
@@ -37,7 +38,7 @@ const defaultRouter = [
     children: [
       {
         path: "/login",
-        name: "login",
+        name: "登录",
         component: Login,
         hidden: true,
         children: []
@@ -57,14 +58,6 @@ const defaultRouter = [
         meta: { title: "首页" },
         children: []
       },
-    ]
-  },
-  {
-    path: "/",
-    name: "",
-    component: Layout,
-    alone:true,
-    children: [
       {
         path: "/staff",
         name: "员工管理",
@@ -72,15 +65,7 @@ const defaultRouter = [
         iconCls: 'el-icon-user',
         meta: { title: "员工管理" },
         children: []
-      }
-    ]
-  },
-  {
-    path: "/",
-    name: "",
-    component: Layout,
-    alone:true,
-    children: [
+      },
       {
         path: "/supplier",
         name: "供应商管理",
@@ -88,15 +73,7 @@ const defaultRouter = [
         iconCls: 'el-icon-s-cooperation',
         meta: { title: "供应商管理" },
         children: []
-      }
-    ]
-  },
-  {
-    path: "/",
-    name: "",
-    component: Layout,
-    alone:true,
-    children: [
+      },
       {
         path: "/goods",
         name: "商品管理",
@@ -104,15 +81,7 @@ const defaultRouter = [
         iconCls: 'el-icon-s-goods',
         meta: { title: "商品管理" },
         children: []
-      }
-    ]
-  },
-  {
-    path: "/",
-    name: "",
-    component: Layout,
-    alone:true,
-    children: [  
+      },
       {
         path: "/member",
         name: "会员管理",

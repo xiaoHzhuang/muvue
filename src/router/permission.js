@@ -3,10 +3,9 @@ import {getUserInfo} from "@/api/login";
 import store from '@/store/index';
 
 router.beforeEach((to,from,next)=>{
-    // const token=localStorage.getItem('my-vue-token');
     const token=store.state.user.token;
     if(!token){
-        if(to.path!=='/login'){
+        if(to.path!=='/login' && to.path!=='/register'){
             next({path:'/login'})
         }else{
             next()
@@ -16,6 +15,7 @@ router.beforeEach((to,from,next)=>{
             next();
         }else{
             const userInfo=store.state.user.user;
+            store.dispatch('initRoutes');
             if(userInfo){
                 next();
             }else{

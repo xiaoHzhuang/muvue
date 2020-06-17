@@ -1,7 +1,10 @@
 const state = {
+    //左侧导航树折叠状态
     isCollapse: false,
     logoShow: false,
+    //当前导航栏中被选中的对象
     currentNav: {},
+    //导航栏
     tabnavBox: [
         {
             title: '首页',

@@ -40,8 +40,7 @@ axiosRetry(axios, {
   shouldResetTimeout: true,      
   retryCondition: (error) => {
     let status=err.response.status;
-    if(status==429){
-      console.log("请求重试");
+    if(status==402){
       return true;
     }else{
       return false;

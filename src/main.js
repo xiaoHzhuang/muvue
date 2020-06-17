@@ -6,7 +6,7 @@ import router from "./router";
 import store from "./store";
 Vue.use(ElementUI);
 Vue.config.productionTip = process.env.NODE_ENV==='production';
-import '@/api/permission';
+import '@/router/permission';
 import '@/utils/commonJs'
 new Vue({
   router,

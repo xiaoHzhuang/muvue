@@ -24,9 +24,10 @@ const user = {
                        const respData=resp.data;
                         commit('SET_TOKEN', respData.token);
                         commit('SET_USER', respData.userName);
-                        resolve(respData);
+                        resolve(resp);
+                    }else{
+                        resolve(resp);
                     }
-              
                 }).catch(errpr => {
                     reject(error)
                 })
