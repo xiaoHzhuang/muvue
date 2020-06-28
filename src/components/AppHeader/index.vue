@@ -40,7 +40,7 @@ export default {
         case "b":
           logOut(localStorage.getItem("my-vue-token")).then(response => {
             const resp = response.data;
-            if (resp.status==401) {
+            if (resp.status == -1 || resp.status == 401 || resp.status == 402) {
               localStorage.removeItem("my-vue-token");
               localStorage.removeItem("my-vue-user");
               this.$router.push("/login");

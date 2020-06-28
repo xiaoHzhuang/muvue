@@ -4,22 +4,22 @@ import Router from '@/router/index'
 import axiosRetry from 'axios-retry';
 
 //遮罩效果
-const loading={
-  loadingInstance:null,//loading实例
-  open:function(){
-    if(this.loadingInstance===null){
-      this.loadingInstance=Loading.service({
-        text:'拼命加载中',
-        target:'.appMain',
-        background:'rgba(0,0,0,0.5)'
+const loading = {
+  loadingInstance: null,//loading实例
+  open: function () {
+    if (this.loadingInstance === null) {
+      this.loadingInstance = Loading.service({
+        text: '拼命加载中',
+        target: '.appMain',
+        background: 'rgba(0,0,0,0.5)'
       })
     }
   },
-  close:function(){//关闭加载
-    if(this.loadingInstance!==null){
+  close: function () {//关闭加载
+    if (this.loadingInstance !== null) {
       this.loadingInstance.close();
     }
-    this.loadingInstance=null;
+    this.loadingInstance = null;
   }
 }
 
@@ -30,19 +30,19 @@ const request = axios.create({
 
 //请求重试机制
 axiosRetry(axios, {
-   // 设置自动发送请求次数
+  // 设置自动发送请求次数
   retries: 3,
-   // 重复请求延迟                      
+  // 重复请求延迟                      
   retryDelay: (retryCount) => {
-    return retryCount * 1000;     
+    return retryCount * 1000;
   },
-   //  重置超时时间
-  shouldResetTimeout: true,      
+  //  重置超时时间
+  shouldResetTimeout: true,
   retryCondition: (error) => {
-    let status=err.response.status;
-    if(status==402){
+    let status = err.response.status;
+    if (status == 402) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -52,17 +52,17 @@ axiosRetry(axios, {
 // 添加请求拦截器
 request.interceptors.request.use(function (config) {
   var token = localStorage.getItem('my-vue-token');
-   if(token){
-    config.headers['Authorization']=token;
-   }
-   loading.open();
+  if (token) {
+    config.headers['Authorization'] = token;
+  }
+  loading.open();
   return config;
 }, function (error) {
   loading.close();
   Message({
-    meaasge:error.message,
-    type:'error',
-    duration:5*1000
+    meaasge: error.message,
+    type: 'error',
+    duration: 5 * 1000
   })
   return Promise.reject(error);
 });
@@ -70,16 +70,16 @@ request.interceptors.request.use(function (config) {
 // 添加响应拦截器
 request.interceptors.response.use(function (response) {
   loading.close();
- if(response.headers['authorization']){
-  localStorage.setItem('my-vue-token',response.headers['authorization']);
- }
+  const respData = response.data;
+  if (respData.status == -1) {
+    Router.push("/login");
+  }
+  if (response.headers['authorization']) {
+    localStorage.setItem('my-vue-token', response.headers['authorization']);
+  }
   return response;
 }, function (error) {
   loading.close();
-  var status=error.response.status;
-  if(status==401){
-    Router.push("/login");
-  }
   return Promise.reject(error);
 });
 

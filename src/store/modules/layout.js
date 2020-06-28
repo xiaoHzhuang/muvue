@@ -71,11 +71,11 @@ const mutations = {
             title: '首页',
             path: '/home'
         }]
+        console.log(arg);
         if (arg.all) {
             arg.router.push('/home')
             return false
         }
-        debugger
         state.tabnavBox.push(arg.tabItem)
         arg.router.push(arg.tabItem.path)
     },

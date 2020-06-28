@@ -17,8 +17,8 @@
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <!-- <li @click="refreshSelectedTag(selectedTag)">刷新</li> -->
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
-      <li @click="removeOtherTab($store.getters.currentNav)">关闭其它</li>
-      <li @click="removeAllTab">关闭全部</li>
+      <li v-if="!isAffix(selectedTag)" @click="removeOtherTab($store.getters.currentNav)">关闭其它</li>
+      <li v-if="!isAffix(selectedTag)" @click="removeAllTab">关闭全部</li>
     </ul>
   </div>
 </template>
@@ -60,7 +60,6 @@ export default {
       this.$nextTick(() => {
         this.$router.replace({
           path: "/redirect" + fullPath
-          // query:{title:view.title}
         });
       });
     },
@@ -161,8 +160,8 @@ $leftright: ($left, $right);
     margin-top: 6px;
     margin-bottom: 5px;
     li {
-      height: 25px;
-      line-height: 25px;
+      height: 24px;
+      line-height: 24px;
       display: flex;
       align-items: center;
       @extend %cursor;

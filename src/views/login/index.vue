@@ -56,6 +56,9 @@
 <script>
 import { login, getUserInfo } from "@/api/login";
 import registerApi from "@/api/register";
+import Base64 from "@/utils/Base64";
+import util from "@/utils/util";
+
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -92,7 +95,7 @@ export default {
       },
       registerFormVisible: false,
       registerForm: {
-        userid:"",
+        userid: "",
         username: "",
         usercaption: "",
         phone: "",
@@ -117,7 +120,7 @@ export default {
         ],
         usercaption: [
           { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 60, message: "长度在 3 到 60 个字符", trigger: "blur" }
+          { min: 1, max: 60, message: "长度在 3 到 60 个字符", trigger: "blur" }
         ],
         email: [
           { required: false, message: "请输入活动名称", trigger: "blur" },
@@ -160,8 +163,10 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$store.dispatch("Login", this.form).then(response => {
-            if (response.status==1) {
+          const formData = util.clone(this.form);
+          formData.password = Base64.base64encode(formData.password);
+          this.$store.dispatch("Login", formData).then(response => {
+            if (response.status == 1) {
               this.$store.dispatch("initRoutes");
               this.$router.push("/home");
             } else {
@@ -179,15 +184,19 @@ export default {
     register(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          registerApi.registerForm(this.registerForm).then(response => {
+          const formData = util.clone(this.registerForm);
+          formData.pwd = Base64.base64encode(formData.pwd);
+          formData.checkPassword = Base64.base64encode(formData.checkPassword);
+          registerApi.registerForm(formData).then(response => {
             var resp = response.data;
-            console.log(resp);
-            if (resp.code) {
+            if (resp.status==1) {
               this.registerFormVisible = false;
-               this.$message({
+              this.$message({
                 message: "注册成功",
                 type: "success"
               });
+              this.form.username=this.registerForm.username;
+              this.form.password=this.registerForm.pwd;
             } else {
               this.$message({
                 message: resp.msg,
@@ -195,7 +204,7 @@ export default {
               });
             }
           });
-        }else {
+        } else {
           return false;
         }
       });
@@ -203,7 +212,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped lang="scss">
 .login-form {
