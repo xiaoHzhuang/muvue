@@ -65,6 +65,7 @@ export default {
 
 .navBar {
   overflow-x: hidden;
+  background-color:"#545c64";
   .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
     overflow-y: scroll;

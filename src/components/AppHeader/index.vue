@@ -1,7 +1,7 @@
 <template>
   <el-header class="appHeader">
     <span class="hideAside" @click="collapse">
-      <i class="el-icon-menu"></i>
+        <i class="el-icon-my-collapse"></i>
     </span>
     <a href="#/">
       <img class="logo" src="@/assets/logo.png" width="25px" />
@@ -40,7 +40,7 @@ export default {
         case "b":
           logOut(localStorage.getItem("my-vue-token")).then(response => {
             const resp = response.data;
-            if (resp.status == -1 || resp.status == 401 || resp.status == 402) {
+            if (resp.status == -1 || resp.data.status == 401 || resp.data.status == 402) {
               localStorage.removeItem("my-vue-token");
               localStorage.removeItem("my-vue-user");
               this.$router.push("/login");

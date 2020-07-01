@@ -39,14 +39,12 @@ const mutations = {
             state.logoShow = true
         }
     },
-    removeTab(state, tabPath) {
-        state.tabnavBox = state.tabnavBox.filter(tab => tab.path !== tabPath);
-    },
     closeSelectedTag(state, arg) {
         let index = state.tabnavBox.findIndex(function (value, key) {
             return value.path === arg.tabItem.path
         })
         state.tabnavBox.splice(index, 1)
+        debugger
         if (arg.tabItem.path === arg.fullPath) {
             let tabActive = state.tabnavBox[index] || state.tabnavBox[index - 1]
             arg.router.push(tabActive.path)
@@ -84,9 +82,6 @@ const mutations = {
 const actions = {
     collapse({ commit }, arg) {
         commit('collapse', arg)
-    },
-    removeTab({ commit }, arg) {
-        commit('removeTab', arg.tabPath);
     },
     closeSelectedTag({ commit }, arg) {
         commit('closeSelectedTag', arg)

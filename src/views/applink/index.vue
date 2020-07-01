@@ -15,7 +15,6 @@
       </transition-group>
     </div>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <!-- <li @click="refreshSelectedTag(selectedTag)">刷新</li> -->
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭</li>
       <li v-if="!isAffix(selectedTag)" @click="removeOtherTab($store.getters.currentNav)">关闭其它</li>
       <li v-if="!isAffix(selectedTag)" @click="removeAllTab">关闭全部</li>
@@ -52,15 +51,10 @@ export default {
       this.$store.dispatch("openMenu", item);
     },
     removeTab(tabItem) {
-      this.$store.dispatch("removeTab", { tabPath: tabItem.path });
-    },
-    refreshSelectedTag(view) {
-      this.$store.dispatch("removeTab", { tabPath: view.path });
-      const { fullPath } = this.$route;
-      this.$nextTick(() => {
-        this.$router.replace({
-          path: "/redirect" + fullPath
-        });
+      this.$store.dispatch("closeSelectedTag", {
+        tabItem,
+        fullPath: this.$route.fullPath,
+        router: this.$router
       });
     },
     isAffix(tag) {
@@ -74,10 +68,13 @@ export default {
       });
     },
     removeOtherTab(tabItem) {
-       this.$store.dispatch("removeOtherTab", {tabItem, router: this.$router})
+      this.$store.dispatch("removeOtherTab", { tabItem, router: this.$router });
     },
     removeAllTab() {
-      this.$store.dispatch("removeOtherTab", {all: true, router: this.$router})
+      this.$store.dispatch("removeOtherTab", {
+        all: true,
+        router: this.$router
+      });
     }
   },
   watch: {

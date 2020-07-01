@@ -1,0 +1,11 @@
+.el-icon-my-collapse{
+    background: url(../images/collapse.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+.el-icon-my-export:before{
+    content: "A";
+    font-size: 16px;
+    visibility: hidden;
+}

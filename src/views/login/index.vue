@@ -12,10 +12,29 @@
         <el-button class="subBtn" type="primary" @click="submitForm('form')">登录</el-button>
       </el-form-item>
       <p class="smalltxt">
-        <router-link class="a" to="#">忘记密码</router-link>
-        <router-link class="a" to @click.native="registerFormVisible = true">免费注册</router-link>
+        <router-link class="a" to="#" @click.native="getPwdVisible = true">忘记密码</router-link>
+        <router-link class="a" to="#" @click.native="registerFormVisible = true">免费注册</router-link>
       </p>
     </el-form>
+    <!--密码找回对话框-->
+    <el-dialog title="密码找回" :visible.sync="getPwdVisible" width="450px">
+      <el-form
+        :model="getPwdForm"
+        :rules="getPwdrRules"
+        label-width="100px"
+        status-icon
+        size="mini"
+        ref="getPwdForm"
+      >
+        <el-form-item label="邮箱地址" :label-width="formLabelWidth" prop="email">
+          <el-input v-model="getPwdForm.email" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="getPwdVisible = false">取 消</el-button>
+        <el-button type="primary" @click="retrievePwd('getPwdForm')">确 定</el-button>
+      </div>
+    </el-dialog>
     <!--用户注册对话框-->
     <el-dialog title="用户注册" :visible.sync="registerFormVisible" width="450px">
       <el-form
@@ -85,6 +104,24 @@ export default {
         username: "",
         password: ""
       },
+      getPwdForm: {
+        email: ""
+      },
+      getPwdrRules: {
+        email: [
+          { required: true, message: "请输入邮箱账号", trigger: "blur" },
+          {
+            min: 3,
+            max: 60,
+            message: "长度在 3 到 60 个字符",
+            trigger: "blur"
+          },
+          {
+            pattern: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+            message: "请输入正确的邮箱账号"
+          }
+        ]
+      },
       rules: {
         username: [
           { required: true, message: "请输入有效账号", trigger: "blur" }
@@ -94,6 +131,7 @@ export default {
         ]
       },
       registerFormVisible: false,
+      getPwdVisible: false,
       registerForm: {
         userid: "",
         username: "",
@@ -106,7 +144,7 @@ export default {
       formLabelWidth: "80px",
       registerRules: {
         username: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { required: true, message: "请输入用户代号", trigger: "blur" },
           {
             min: 3,
             max: 60,
@@ -119,11 +157,11 @@ export default {
           }
         ],
         usercaption: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { required: true, message: "请输入用户名称", trigger: "blur" },
           { min: 1, max: 60, message: "长度在 3 到 60 个字符", trigger: "blur" }
         ],
         email: [
-          { required: false, message: "请输入活动名称", trigger: "blur" },
+          { required: true, message: "请输入邮箱账号", trigger: "blur" },
           {
             min: 3,
             max: 60,
@@ -136,7 +174,7 @@ export default {
           }
         ],
         phone: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { required: true, message: "请输入联系方式", trigger: "blur" },
           {
             min: 3,
             max: 60,
@@ -160,6 +198,32 @@ export default {
     };
   },
   methods: {
+    retrievePwd(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          registerApi.retrievePwd(this.getPwdForm.email).then(response => {
+            const respData = response.data;
+            if (respData.status == 0) {
+              this.$message({
+                message: "发送邮件失败",
+                type: "warning"
+              });
+            } else if (respData.status == 4) {
+              this.$message({
+                message: "邮箱不存在",
+                type: "warning"
+              });
+            } else {
+              this.$message({
+                message: respData.data,
+                type: "success"
+              });
+              this.getPwdVisible = false;
+            }
+          });
+        }
+      });
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -189,14 +253,14 @@ export default {
           formData.checkPassword = Base64.base64encode(formData.checkPassword);
           registerApi.registerForm(formData).then(response => {
             var resp = response.data;
-            if (resp.status==1) {
+            if (resp.status == 1) {
               this.registerFormVisible = false;
               this.$message({
                 message: "注册成功",
                 type: "success"
               });
-              this.form.username=this.registerForm.username;
-              this.form.password=this.registerForm.pwd;
+              this.form.username = this.registerForm.username;
+              this.form.password = this.registerForm.pwd;
             } else {
               this.$message({
                 message: resp.msg,

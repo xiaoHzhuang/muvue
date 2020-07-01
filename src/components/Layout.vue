@@ -80,6 +80,7 @@ body,
 .appHeader {
   line-height: 60px;
   background-color: #545c64;
+    // background-color: white;
   height: 60px;
   width: 100%;
 }
