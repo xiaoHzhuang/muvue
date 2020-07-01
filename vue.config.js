@@ -21,4 +21,7 @@ module.exports={
     },
     lintOnSave:false,//关闭格式检查
     productionSourceMap:false,//打包时不会生成.map文件，加快打包速度
+    publicPath: './',
+    outputDir: "dist", // 输出文件目录
+    assetsDir: 'static', // 配置js、css静态资源二级目录的位置  
 }

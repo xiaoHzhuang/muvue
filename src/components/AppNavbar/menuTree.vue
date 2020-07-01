@@ -23,5 +23,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    /*隐藏文字*/
+  .el-menu--collapse  .el-submenu__title span{
+    display: none;
+  }
+  .el-submenu__title span:not(.el-menu--collapse){
+    display: show;
+  }
 </style>

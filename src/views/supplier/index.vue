@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="searchForm" :inline="true" :model="searchMap" class="demo-form-inline searchForm">
+    <el-form ref="searchForm" :inline="true" :model="searchMap"  size="small" class="demo-form-inline searchForm">
       <el-form-item prop="supplierName" style="width:100px">
         <el-input v-model="searchMap.supplierName" placeholder="供应商名称"></el-input>
       </el-form-item>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="searchForm" :inline="true" :model="searchMap" class="demo-form-inline searchForm">
+    <el-form ref="searchForm" :inline="true" :model="searchMap"  size="small" class="demo-form-inline searchForm">
       <el-form-item prop="cardNum" style="width:150px">
         <el-input v-model="searchMap.cardNum" placeholder="会员卡号"></el-input>
       </el-form-item>
@@ -161,7 +161,7 @@ export default {
   mounted() {
     window.onresize = () => {
       return (() => {
-        let heightStyle = window.innerHeight - 200;
+        let heightStyle = window.innerHeight - 210;
         this.tableHeight = heightStyle;
       })();
     };

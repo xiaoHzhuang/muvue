@@ -20,12 +20,12 @@ const user = {
             return new Promise((resolve, reject) => {
                 login(form.username.trim(), form.password).then(response => {
                     const resp = response.data;
-                    if(resp.status==1){
-                       const respData=resp.data;
+                    if (resp.status == 1) {
+                        const respData = resp.data;
                         commit('SET_TOKEN', respData.token);
                         commit('SET_USER', respData.userName);
                         resolve(resp);
-                    }else{
+                    } else {
                         resolve(resp);
                     }
                 }).catch(errpr => {

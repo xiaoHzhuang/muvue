@@ -65,11 +65,13 @@ export default {
 
 .navBar {
   overflow-x: hidden;
+  background-color: "#545c64";
   .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
+
   .el-menu {
     flex: 1;
     margin-top: 60px;
@@ -98,6 +100,13 @@ export default {
       color: #ffffff;
       font-weight: 500;
       font-size: 18px;
+    }
+    /*隐藏文字*/
+    .el-menu--collapse .el-submenu__title span {
+      display: none;
+    }
+    .el-submenu__title span:not(.el-menu--collapse) {
+      display: show;
     }
   }
 }

@@ -7,6 +7,7 @@ import Member from "@/views/member"
 import Staff from "@/views/staff"
 import Supplier from "@/views/supplier"
 import Goods from "@/views/goods"
+import Task from "@/views/taskmanage"
 
 Vue.use(VueRouter);
 
@@ -70,7 +71,7 @@ const defaultRouter = [
         path: "/supplier",
         name: "供应商管理",
         component: Supplier,
-        iconCls: 'el-icon-s-cooperation',
+        iconCls: 'el-icon-goods',
         meta: { title: "供应商管理" },
         children: []
       },
@@ -86,9 +87,49 @@ const defaultRouter = [
         path: "/member",
         name: "会员管理",
         component: Member,
-        iconCls: 'el-icon-user-solid',
+        iconCls: 'el-icon-coordinate',
         meta: { title: "会员管理" },
         children: []
+      },
+      {
+        path: "/task",
+        name: "任务调度",
+        component: Task,
+        redirect:"/taskManage",
+        iconCls: 'el-icon-postcard',
+        meta: { title: "任务调度" },
+        children: [
+        {
+          path: "/taskManage",
+          name: "任务管理",
+          component: Task,
+          iconCls: 'el-icon-help',
+          meta: { title: "任务管理" },
+          children: []
+        },
+        // {
+        //   path: "/member",
+        //   name: "任务管理",
+        //   component: Member,
+        //   // iconCls: 'el-icon-user-solid',
+        //   meta: { title: "任务管理" },
+        //   children: []
+        // },{
+        //   path: "/member",
+        //   name: "调度日志",
+        //   component: Member,
+        //   // iconCls: 'el-icon-user-solid',
+        //   meta: { title: "调度日志" },
+        //   children: []
+        // },{
+        //   path: "/member",
+        //   name: "执行器管理",
+        //   component: Member,
+        //   // iconCls: 'el-icon-user-solid',
+        //   meta: { title: "执行器管理" },
+        //   children: []
+        // }
+      ]
       }
     ]
   }
