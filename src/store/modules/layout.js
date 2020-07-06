@@ -44,6 +44,7 @@ const mutations = {
             return value.path === arg.tabItem.path
         })
         state.tabnavBox.splice(index, 1)
+        debugger
         if (arg.tabItem.path === arg.fullPath) {
             let tabActive = state.tabnavBox[index] || state.tabnavBox[index - 1]
             arg.router.push(tabActive.path)

@@ -5,6 +5,7 @@
     height:16px;
 }
 .el-icon-my-export:before{
+<<<<<<< HEAD
     content: "";
     font-size: 16px;
     visibility: hidden;
@@ -19,6 +20,9 @@
 
 .el-icon-my-supplier:before{
     content: "";
+=======
+    content: "A";
+>>>>>>> 569d4d54e9977adaaacfe3c0949a31ba9e59cb88
     font-size: 16px;
     visibility: hidden;
 }
