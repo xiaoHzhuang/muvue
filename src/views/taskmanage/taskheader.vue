@@ -20,7 +20,7 @@
       </el-form-item>
     </el-form>
 
-    <el-dialog title="新增任务" :visible.sync="dialogVisible" width="70%" :before-close="handleClose">
+    <el-dialog title="新增任务" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
       <add-job></add-job>
     </el-dialog>
   </div>

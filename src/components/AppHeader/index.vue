@@ -7,6 +7,7 @@
       <img class="logo" src="@/assets/logo.png" width="25px" />
       <span class="company">管理系统</span>
     </a>
+    <el-avatar shape="square" :size="25" src="@/assets/images/user.svg"></el-avatar>
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
         {{$store.state.user.user}}
@@ -24,7 +25,9 @@
 import { logOut } from "@/api/login";
 export default {
   data() {
-    return {};
+    return {
+        squareUrl: "@/assets/images/user.png"
+    };
   },
 
   components: {},
@@ -65,6 +68,12 @@ export default {
   vertical-align: middle;
   padding: 0 10px 0 40px;
 }
+
+.el-avatar{
+   position:absolute;
+   right: 100px;
+   top:18px;
+}
 .el-dropdown {
   float: right;
   margin-right: 40px;
@@ -75,5 +84,7 @@ export default {
 }
 .hideAside {
   cursor: pointer;
+  position:absolute;
+  top:5px;
 }
 </style>

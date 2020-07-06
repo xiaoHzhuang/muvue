@@ -9,21 +9,25 @@
   >
     <el-row>
       <el-col :span="11">
-        <el-form-item label="执行器" prop="executor">
-          <el-input v-model="ruleForm.executor"></el-input>
+        <el-form-item label="执行器" prop="jobGroup">
+          <el-input v-model="ruleForm.jobGroup" class="width_200"></el-input>
         </el-form-item>
       </el-col>
       <el-col class="line" :span="2"></el-col>
       <el-col :span="11">
         <el-form-item label="任务描述" prop="jobDesc">
-          <el-input v-model="ruleForm.jobDesc"></el-input>
+          <el-input v-model="ruleForm.jobDesc" class="width_200"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="11">
-        <el-form-item label="路由策略" prop="executorRouteStrategy">
-          <el-select v-model="ruleForm.executorRouteStrategy" placeholder="请选择路由策略" style="width:297px">
+        <el-form-item label="任务路由策略" prop="executorRouteStrategy">
+          <el-select
+            v-model="ruleForm.executorRouteStrategy"
+            placeholder="请选择任务路由策略"
+            class="width_200"
+          >
             <el-option label="第一个" value="FIRST"></el-option>
             <el-option label="最后一个" value="LAST"></el-option>
             <el-option label="轮询" value="ROUND"></el-option>
@@ -39,39 +43,34 @@
       </el-col>
       <el-col class="line" :span="2"></el-col>
       <el-col :span="11">
-        <el-form-item label="Cron" prop="cron">
-          <el-input v-model="ruleForm.cron"></el-input>
+        <el-form-item label="Cron表达式" prop="jobCron">
+          <el-input v-model="ruleForm.jobCron" class="width_200"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="11">
-        <el-form-item label="运行模式" prop="executorRunMode">
-          <el-select v-model="ruleForm.executorRunMode" placeholder="请选择运行模式" style="width:297px">
-            <el-option label="第一个" value="FIRST"></el-option>
-            <el-option label="最后一个" value="LAST"></el-option>
-            <el-option label="轮询" value="ROUND"></el-option>
-            <el-option label="随机" value="RANDOM"></el-option>
-            <el-option label="一致性HASH" value="CONSISTENT_HASH"></el-option>
-            <el-option label="最不经常使用" value="LEAST_FREQUENTLY_USED"></el-option>
-            <el-option label="最近最久未使用" value="LEAST_RECENTLY_USED"></el-option>
-            <el-option label="故障转移" value="FAILOVER"></el-option>
-            <el-option label="忙碌转移" value="BUSYOVER"></el-option>
-            <el-option label="分片广播" value="SHARDING_BROADCAST"></el-option>
+        <el-form-item label="任务运行模式" prop="glueType">
+          <el-select v-model="ruleForm.glueType" placeholder="请选择任务运行模式" class="width_200">
+            <el-option label="BEAN" value="BEAN"></el-option>
           </el-select>
         </el-form-item>
       </el-col>
       <el-col class="line" :span="2"></el-col>
       <el-col :span="11">
         <el-form-item label="JobHandler" prop="jobHandler">
-          <el-input v-model="ruleForm.jobHandler"></el-input>
+          <el-input v-model="ruleForm.jobHandler" class="width_200"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="11">
         <el-form-item label="阻塞处理策略" prop="executorBlockStrategy">
-          <el-select v-model="ruleForm.executorBlockStrategy" placeholder="请选择阻塞处理策略" style="width:297px">
+          <el-select
+            v-model="ruleForm.executorBlockStrategy"
+            placeholder="请选择阻塞处理策略"
+            class="width_200"
+          >
             <el-option label="单机串行" value="SERIAL_EXECUTION"></el-option>
             <el-option label="丢弃后续调度" value="DISCARD_LATER"></el-option>
             <el-option label="覆盖之前调度" value="COVER_EARLY"></el-option>
@@ -80,22 +79,21 @@
       </el-col>
       <el-col class="line" :span="2"></el-col>
       <el-col :span="11">
-        <el-form-item label="报警邮件" prop="alarmEmail">
-          <el-input v-model="ruleForm.alarmEmail"></el-input>
+        <el-form-item label="任务报警邮件" prop="alarmEmail">
+          <el-input v-model="ruleForm.alarmEmail" class="width_200"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="11">
-        <el-form-item label="任务超时时间">
-          <!-- <el-input v-model="ruleForm.executorTimeout"></el-input> -->
-          <el-input-number v-model="executorTimeout" @change="handleChange" :min="1" :max="10" label="单位秒"></el-input-number>
+        <el-form-item label="任务超时时间"  prop="executorTimeout"   placeholder="单位（S）">
+          <el-input v-model="ruleForm.executorTimeout" class="width_200"></el-input>
         </el-form-item>
       </el-col>
       <el-col class="line" :span="2"></el-col>
       <el-col :span="11">
         <el-form-item label="失败重试次数" prop="executorFailRetryCount">
-          <el-input v-model="ruleForm.executorFailRetryCount"></el-input>
+           <el-input v-model="ruleForm.executorFailRetryCount" class="width_200"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -111,19 +109,19 @@ export default {
   data() {
     return {
       ruleForm: {
-        executor: "",
+        jobGroup: "",
         jobDesc: "",
         executorRouteStrategy: "",
-        cron: "",
-        executorRunMode: "",
+        jobCron: "",
+        glueType: "BEAN",
         jobHandler: "",
         executorBlockStrategy: "",
         alarmEmail: "",
-        executorTimeout: "",
-        executorFailRetryCount: ""
+        executorTimeout: 60,
+        executorFailRetryCount: 3
       },
       rules: {
-        executor: [
+        jobGroup: [
           { required: true, message: "请选择执行器", trigger: "change" }
         ],
         jobDesc: [
@@ -133,10 +131,10 @@ export default {
         executorRouteStrategy: [
           { required: true, message: "请选择路由策略", trigger: "change" }
         ],
-        cron: [
+        jobCron: [
           { required: true, message: "请设置cron表达式", trigger: "blur" }
         ],
-        executorRunMode: [
+        glueType: [
           { required: true, message: "请选择运行模式", trigger: "change" }
         ],
         jobHandler: [
@@ -148,11 +146,11 @@ export default {
         alarmEmail: [
           { required: true, message: "请填写报警邮件", trigger: "blur" }
         ],
-        // executorTimeout: [
-        //   { required: true, message: "请填写任务超时时间", trigger: "blur" }
-        // ],
-        executorFailRetryCount: [
-          { required: true, message: "请填写失败重试次数", trigger: "blur" }
+        executorTimeout:[
+          {required: false, message: "请正确填写超时时间",type:"number", trigger: "blur"}
+        ],
+        executorFailRetryCount:[
+          {required: false, message: "请正确填写失败重试次数",type:"number", trigger: "blur"}
         ]
       }
     };
@@ -179,4 +177,7 @@ export default {
 </script>
 
 <style scoped>
+.width_200{
+  width:200px;
+}
 </style>
