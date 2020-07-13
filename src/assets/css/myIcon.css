@@ -1,0 +1,50 @@
+.el-icon-my-collapse{
+    background: url(../images/collapse.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+.el-icon-my-export:before{
+    content: "";
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-supplier{
+    background: url(../images/supplier.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+
+.el-icon-my-supplier:before{
+    content: "";
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-user{
+    background: url(../images/user.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+
+.el-icon-my-user:before{
+    content: "";
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-fullscreen{
+    background: url(../images/fullscreen.svg) center no-repeat;
+    background-size: cover;
+    width:25px;
+    height:25px;
+}
+
+.el-icon-my-fullscreen:before{
+    content: "";
+    font-size: 25px;
+    visibility: hidden;
+}
