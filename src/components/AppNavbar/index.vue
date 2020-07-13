@@ -42,8 +42,9 @@ export default {
   watch: {
     // 监听浏览器直接输入路由，将此路由添加到tabnavBox
     "$route.path": function(val) {
+      debugger;
       this.selectmenu(val);
-    }
+    },
   },
   methods: {
     selectmenu(key) {

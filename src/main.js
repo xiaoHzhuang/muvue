@@ -6,9 +6,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 Vue.use(ElementUI);
-Vue.config.productionTip = process.env.NODE_ENV==='production';
+Vue.config.productionTip = process.env.NODE_ENV === 'production';
 import '@/router/permission';
 import '@/utils/commonJs';
+
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/swiper-bundle.css'
+Vue.use(VueAwesomeSwiper);
 
 
 new Vue({
@@ -16,5 +20,5 @@ new Vue({
   store,
   render: h => h(App),
   created() {
-  },
+  }
 }).$mount("#app");

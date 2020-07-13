@@ -1,37 +1,99 @@
 <template>
   <el-header class="appHeader">
-    <span class="hideAside" @click="collapse">
+    <div class="leftContainer">
+      <span class="hideAside" @click="collapse">
         <i class="el-icon-my-collapse"></i>
-    </span>
-    <a href="#/">
-      <img class="logo" src="@/assets/logo.png" width="25px" />
-      <span class="company">管理系统</span>
-    </a>
-    <el-avatar shape="square" :size="25" src="@/assets/images/user.svg"></el-avatar>
-    <el-dropdown @command="handleCommand">
-      <span class="el-dropdown-link">
-        {{$store.state.user.user}}
-        <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="a">修改密码</el-dropdown-item>
-        <el-dropdown-item command="b">退出系统</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+      <span class="systemPic">
+        <img class="logo" src="@/assets/logo.png" width="25px" />
+        <span class="company">管理系统</span>
+      </span>
+    </div>
+    <div class="moduleContainer">
+      <div style="width:500px;margin:0 auto;height:60px">
+        <swiper
+          class="swiper"
+          ref="mySwiper"
+          :options="swiperOption"
+          @click-slide="handleClickSlide"
+          @click-="handleClickSlide"
+        >
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+          <swiper-slide style="width:80px">
+            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
+    <div class="rightContainer">
+      <el-dropdown @command="handleCommand" style="float:right">
+        <span class="el-dropdown-link">
+          {{$store.state.user.user}}
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="a">修改密码</el-dropdown-item>
+          <el-dropdown-item command="b">退出系统</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-avatar shape="square" :size="25" icon="el-icon-my-user" style="float:right"></el-avatar>
+    </div>
   </el-header>
 </template>
 
 <script>
 import { logOut } from "@/api/login";
+import "swiper/swiper-bundle.css";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+
 export default {
   data() {
     return {
-        squareUrl: "@/assets/images/user.png"
+      url:
+        "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+      swiperOption: {
+        // 每页展示几条数据
+        slidesPerView: 4,
+        // 每屏滚动几条数据
+        slidesPerGroup: 4,
+        spaceBetween: 0,
+        grabCursor: true,
+        direction: "horizontal",
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        observer: true,
+        observeParents: true,
+        on: {
+          click: function(e) {
+            console.log(e);
+          }
+        }
+      }
     };
   },
 
-  components: {},
-
+  components: { Swiper, SwiperSlide },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.$swiper;
+    }
+  },
   methods: {
     collapse() {
       this.$store.dispatch("collapse");
@@ -43,7 +105,11 @@ export default {
         case "b":
           logOut(localStorage.getItem("my-vue-token")).then(response => {
             const resp = response.data;
-            if (resp.status == -1 || resp.data.status == 401 || resp.data.status == 402) {
+            if (
+              resp.status == -1 ||
+              resp.data.status == 401 ||
+              resp.data.status == 402
+            ) {
               localStorage.removeItem("my-vue-token");
               localStorage.removeItem("my-vue-user");
               this.$router.push("/login");
@@ -58,33 +124,61 @@ export default {
         default:
           break;
       }
+    },
+    handleClickSlide() {
+      console.log("A");
+    },
+    prevClick() {
+      this.swiper.slidePrev();
+    },
+    rightClick() {
+      this.swiper.slideNext();
     }
   }
 };
 </script>
 
-<style scoped>
-.logo {
-  vertical-align: middle;
-  padding: 0 10px 0 40px;
+<style scoped lang="scss">
+.leftContainer {
+  position: absolute;
+  width: 15%;
+  height: 60px;
+  min-width: 150px;
+  .hideAside {
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  .systemPic {
+    .logo {
+      vertical-align: middle;
+      padding: 0 10px 0 40px;
+    }
+  }
 }
-
-.el-avatar{
-   position:absolute;
-   right: 100px;
-   top:18px;
+.moduleContainer {
+  position: absolute;
+  float: left;
+  width: 65%;
+  height: 60px;
+  left: 15%;
+  .swiper-slide {
+    height: 60px;
+    font-size: 50px;
+    text-align: center;
+    line-height: 40px;
+  }
 }
-.el-dropdown {
-  float: right;
-  margin-right: 40px;
-}
-.el-dropdown-link {
-  cursor: pointer;
-  color: #fff;
-}
-.hideAside {
-  cursor: pointer;
-  position:absolute;
-  top:5px;
+.rightContainer {
+  position: absolute;
+  width: 20%;
+  height: 60px;
+  left: 80%;
+  .el-avatar {
+    margin-top: 18px;
+  }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #fff;
+  }
 }
 </style>

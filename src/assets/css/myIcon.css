@@ -18,7 +18,20 @@
 }
 
 .el-icon-my-supplier:before{
-    content: "A";
+    content: "";
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-user{
+    background: url(../images/user.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+
+.el-icon-my-user:before{
+    content: "";
     font-size: 16px;
     visibility: hidden;
 }

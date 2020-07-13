@@ -8,6 +8,7 @@ import Staff from "@/views/staff"
 import Supplier from "@/views/supplier"
 import Goods from "@/views/goods"
 import Task from "@/views/taskmanage"
+import Recycle from "@/views/recyclePicture"
 
 Vue.use(VueRouter);
 
@@ -27,7 +28,7 @@ const defaultRouter = [
     path: "/login",
     name: "登录",
     component: Login,
-    hidden: true,
+    hidden: true,//左侧导航不显示该菜单项，子菜单也不显示
     children: []
   },
   {
@@ -35,7 +36,7 @@ const defaultRouter = [
     name: "",
     component: Layout,
     redirect: "/login",
-    alone:true,
+    alone: true,//左侧导航不显示该菜单项，但子菜单可能显示
     children: [
       {
         path: "/login",
@@ -49,7 +50,7 @@ const defaultRouter = [
     path: "/",
     name: "",
     component: Layout,
-    alone:true,
+    alone: true,
     children: [
       {
         path: "/home",
@@ -92,44 +93,30 @@ const defaultRouter = [
         children: []
       },
       {
+        path: "/recyclePicture",
+        name: "轮播图",
+        component: Recycle,
+        iconCls: 'el-icon-help',
+        meta: { title: "轮播图" },
+        children: []
+      },
+      {
         path: "/task",
         name: "任务调度",
         component: Task,
-        redirect:"/taskManage",
+        redirect: "/taskManage",
         iconCls: 'el-icon-postcard',
         meta: { title: "任务调度" },
         children: [
-        {
-          path: "/taskManage",
-          name: "任务管理",
-          component: Task,
-          iconCls: 'el-icon-help',
-          meta: { title: "任务管理" },
-          children: []
-        },
-        // {
-        //   path: "/member",
-        //   name: "任务管理",
-        //   component: Member,
-        //   // iconCls: 'el-icon-user-solid',
-        //   meta: { title: "任务管理" },
-        //   children: []
-        // },{
-        //   path: "/member",
-        //   name: "调度日志",
-        //   component: Member,
-        //   // iconCls: 'el-icon-user-solid',
-        //   meta: { title: "调度日志" },
-        //   children: []
-        // },{
-        //   path: "/member",
-        //   name: "执行器管理",
-        //   component: Member,
-        //   // iconCls: 'el-icon-user-solid',
-        //   meta: { title: "执行器管理" },
-        //   children: []
-        // }
-      ]
+          {
+            path: "/taskManage",
+            name: "任务管理",
+            component: Task,
+            iconCls: 'el-icon-help',
+            meta: { title: "任务管理" },
+            children: []
+          },
+        ]
       }
     ]
   }

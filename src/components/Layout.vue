@@ -1,8 +1,8 @@
 <template>
   <div id="layout">
-    <el-container>
+    <el-container style="min-width:1200px">
       <app-navbar></app-navbar>
-      <el-container class="container">
+      <el-container class="container" style="min-width:1000px">
         <app-header></app-header>
         <transition name="main" mode="out-in">
           <app-main></app-main>

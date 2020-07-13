@@ -1,31 +1,47 @@
 import router from '@/router/index';
-import {getUserInfo} from "@/api/login";
+import { getUserInfo } from "@/api/login";
 import store from '@/store/index';
 
-router.beforeEach((to,from,next)=>{
-    const token=store.state.user.token;
-    if(!token){
-        if(to.path!=='/login' && to.path!=='/register'){
-            next({path:'/login'})
-        }else{
+router.beforeEach((to, from, next) => {
+    let title = to.meta.title;
+    let path = to.path;
+    const token = store.state.user.token;
+    //如果没有token信息
+    if (!token) {
+        if (to.path !== '/login' && to.path !== '/register') {
+            next({ path: '/login' })
+        } else {
             next()
         }
-    }else{
-        if(to.path==='/login'){
+    }
+    //如果含有token信息
+    else {
+        if (to.path === '/login') {
             next();
-        }else{
-            const userInfo=store.state.user.user;
+        } else {
+            const userInfo = store.state.user.user;
             store.dispatch('initRoutes');
-            if(userInfo){
+            //如果当前用户信息存在
+            if (userInfo) {
                 next();
-            }else{
-                getUserInfo(token).then(response=>{
-                    const resp=response.data;
-                    if(resp.flag){
-                        localStorage.setItem('my-vue-user',resp.userName);
+                store.dispatch("addTab", {
+                    title: title,
+                    path: path
+                });
+            }
+            //如果当前用户信息不存在
+            else {
+                getUserInfo(token).then(response => {
+                    const resp = response.data;
+                    if (resp.flag) {
+                        localStorage.setItem('my-vue-user', resp.userName);
                         next();
-                    }else{
-                        next({path:'/login'})
+                        store.dispatch("addTab", {
+                            title: title,
+                            path: path
+                        });
+                    } else {
+                        next({ path: '/login' })
                     }
                 })
             }

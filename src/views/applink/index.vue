@@ -30,10 +30,12 @@ export default {
       visible: false,
       left: 0,
       top: 0,
+      //当前打开右键菜单的导航Tab
       selectedTag: {}
     };
   },
   methods: {
+    //导航Tab右键菜单
     openMenu(item, e, index) {
       const menuMinWidth = 105;
       const offsetLeft = this.$el.getBoundingClientRect().left; // container margin left
@@ -48,6 +50,7 @@ export default {
       this.top = e.clientY - 45;
       this.visible = true;
       this.selectedTag = item;
+      //在vuex状态管理器中设置当前导航栏中被选中的对象
       this.$store.dispatch("openMenu", item);
     },
     removeTab(tabItem) {
@@ -57,9 +60,11 @@ export default {
         router: this.$router
       });
     },
+    //首页导航Tab不允许弹出右键菜单选项
     isAffix(tag) {
       return tag.path == "/home";
     },
+    //关闭当前导航Tab
     closeSelectedTag(tabItem) {
       this.$store.dispatch("closeSelectedTag", {
         tabItem,
@@ -67,9 +72,11 @@ export default {
         router: this.$router
       });
     },
+    //关闭其它导航Tab
     removeOtherTab(tabItem) {
       this.$store.dispatch("removeOtherTab", { tabItem, router: this.$router });
     },
+    //关闭所有导航Tab
     removeAllTab() {
       this.$store.dispatch("removeOtherTab", {
         all: true,
@@ -96,6 +103,7 @@ export default {
 .tabnav {
   display: inline-block;
   transition: all 0.5s;
+  border-radius: 4px;
 }
 
 .list-enter,

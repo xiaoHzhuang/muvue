@@ -9,10 +9,6 @@ const state = {
         {
             title: '首页',
             path: '/home'
-        },
-        {
-            title: '员工管理',
-            path: '/staff'
         }
     ]
 }
@@ -44,8 +40,8 @@ const mutations = {
             return value.path === arg.tabItem.path
         })
         state.tabnavBox.splice(index, 1)
-        debugger
         if (arg.tabItem.path === arg.fullPath) {
+            //优先选中后面的导航Tab
             let tabActive = state.tabnavBox[index] || state.tabnavBox[index - 1]
             arg.router.push(tabActive.path)
         }
@@ -69,7 +65,6 @@ const mutations = {
             title: '首页',
             path: '/home'
         }]
-        console.log(arg);
         if (arg.all) {
             arg.router.push('/home')
             return false
