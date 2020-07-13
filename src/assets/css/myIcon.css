@@ -1,0 +1,50 @@
+<<<<<<< HEAD
+=======
+.el-icon-my-collapse{
+    background: url(../images/collapse.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+.el-icon-my-export:before{
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 704e1ac3c939641d54781e5497b4813c58410c3d
+    content: "";
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-supplier{
+    background: url(../images/supplier.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+
+.el-icon-my-supplier:before{
+    content: "";
+<<<<<<< HEAD
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.el-icon-my-user{
+    background: url(../images/user.svg) center no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+}
+
+.el-icon-my-user:before{
+    content: "";
+=======
+=======
+    content: "A";
+>>>>>>> 569d4d54e9977adaaacfe3c0949a31ba9e59cb88
+>>>>>>> 704e1ac3c939641d54781e5497b4813c58410c3d
+    font-size: 16px;
+    visibility: hidden;
+}
+>>>>>>> c302206d295660a8f324ea5e9acd041250cbd830
