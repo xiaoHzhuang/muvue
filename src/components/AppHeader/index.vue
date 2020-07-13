@@ -18,23 +18,8 @@
           @click-slide="handleClickSlide"
           @click-="handleClickSlide"
         >
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          <swiper-slide style="width:80px" v-for="(item,index) in moduleList"  :key="index">
+            <el-image style="width: 70px; height: 60px" :src="require('../../assets/images/modules/'+item.modulePic)"></el-image>
           </swiper-slide>
         </swiper>
       </div>
@@ -67,8 +52,18 @@ export default {
   data() {
     return {
       isfullScreen:true,
-      url:
-        "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+      moduleList:[
+        {modulePic:'module1.svg'},
+        {modulePic:'module2.svg'},
+        {modulePic:'module3.svg'},
+        {modulePic:'module4.svg'},
+        {modulePic:'module5.svg'},
+        {modulePic:'module6.svg'},
+        {modulePic:'module7.svg'},
+        {modulePic:'module8.svg'},
+        {modulePic:'module9.svg'},
+        {modulePic:'module10.svg'}
+      ],
       swiperOption: {
         // 每页展示几条数据
         slidesPerView: 4,

@@ -54,6 +54,7 @@ const defaultRouter = [
       {
         path: "/home",
         name: "首页",
+        hidden: true,
         component: Home,
         iconCls: 'el-icon-s-menu',
         meta: { title: "首页" },
