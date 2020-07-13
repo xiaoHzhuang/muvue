@@ -1,5 +1,5 @@
 import router from '@/router/index';
-import { getUserInfo } from "@/api/login";
+import { getUserInfo } from "@/api/login/login";
 import store from '@/store/index';
 
 router.beforeEach((to, from, next) => {

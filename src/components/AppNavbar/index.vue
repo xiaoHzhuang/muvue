@@ -11,18 +11,21 @@
       :collapse-transition="false"
       :unique-opened="true"
     >
-      <template v-for="(item,index) in $store.getters.routers" v-if="!item.hidden">
-        <el-submenu v-if="!item.alone && item.children.length>0" :index="index+''">
+      <template v-for="(item) in $store.getters.routers" v-if="!item.hidden">
+        <!-- 展现本级及子级菜单项 -->
+        <el-submenu v-if="!item.alone && item.children.length>0" :index="item.path" :key="item.path">
           <template slot="title">
             <i :class="item.iconCls"></i>
             <span slot="title">{{ item.name}}</span>
           </template>
           <menu-tree :menuData="item.children"></menu-tree>
         </el-submenu>
-        <template v-else-if="item.children.length>0 && item.name==''" :index="index+''">
-          <menu-tree :menuData="item.children"></menu-tree>
+        <!-- 不展现本级菜单项,仅展现子级菜单项 -->
+        <template v-else-if="item.alone && item.children.length>0 && item.name==''" :index="item.path">
+          <menu-tree :menuData="item.children" :key="item.path"></menu-tree>
         </template>
-        <el-menu-item :index="item.path" v-else>
+        <!-- 没有子级菜单,仅展示本级菜单项 -->
+        <el-menu-item :index="item.path" v-else :key="item.path">
           <i :class="item.iconCls"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>
@@ -42,9 +45,8 @@ export default {
   watch: {
     // 监听浏览器直接输入路由，将此路由添加到tabnavBox
     "$route.path": function(val) {
-      debugger;
       this.selectmenu(val);
-    },
+    }
   },
   methods: {
     selectmenu(key) {

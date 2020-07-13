@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import memberApi from "@/api/member";
+import memberApi from "@/api/member/member";
 const payTypeOptions = [
   { type: 1, name: "现金" },
   { type: 2, name: "微信" },

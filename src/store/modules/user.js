@@ -1,5 +1,5 @@
 import { setToken, setUser, getToken, getUser } from '@/utils/auth'
-import { login } from '@/api/login'
+import { login } from '@/api/login/login'
 const user = {
     state: {
         token: getToken(),

@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import { login, getUserInfo } from "@/api/login";
-import registerApi from "@/api/register";
+import { login, getUserInfo } from "@/api/login/login";
+import registerApi from "@/api/login/register";
 import Base64 from "@/utils/Base64";
 import util from "@/utils/util";
 

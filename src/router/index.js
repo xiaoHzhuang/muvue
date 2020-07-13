@@ -36,13 +36,12 @@ const defaultRouter = [
     name: "",
     component: Layout,
     redirect: "/login",
-    alone: true,//左侧导航不显示该菜单项，但子菜单可能显示
+    hidden: true,
     children: [
       {
         path: "/login",
         name: "登录",
         component: Login,
-        hidden: true,
         children: []
       }]
   },
@@ -50,7 +49,7 @@ const defaultRouter = [
     path: "/",
     name: "",
     component: Layout,
-    alone: true,
+    alone: true,//左侧导航不显示该菜单项，但子菜单可能显示
     children: [
       {
         path: "/home",

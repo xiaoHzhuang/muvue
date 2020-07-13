@@ -93,7 +93,7 @@
 
 <script>
 import Supplier from "@/views/supplier";
-import goodsApi from "@/api/goods";
+import goodsApi from "@/api/goods/goods";
 export default {
   data() {
     return {

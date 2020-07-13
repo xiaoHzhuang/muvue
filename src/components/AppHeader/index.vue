@@ -51,18 +51,22 @@
         </el-dropdown-menu>
       </el-dropdown>
       <el-avatar shape="square" :size="25" icon="el-icon-my-user" style="float:right"></el-avatar>
+      <el-tooltip class="item" effect="dark" content="全屏" placement="bottom"  style="float:right">
+        <i class="el-icon-my-fullscreen"  @click="fullScreen"></i>
+      </el-tooltip>
     </div>
   </el-header>
 </template>
 
 <script>
-import { logOut } from "@/api/login";
+import { logOut } from "@/api/login/login";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 
 export default {
   data() {
     return {
+      isfullScreen:true,
       url:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
       swiperOption: {
@@ -87,7 +91,6 @@ export default {
       }
     };
   },
-
   components: { Swiper, SwiperSlide },
   computed: {
     swiper() {
@@ -133,6 +136,32 @@ export default {
     },
     rightClick() {
       this.swiper.slideNext();
+    },
+    fullScreen(){
+            if (this.isfullScreen) {
+        var docElm = document.documentElement
+        if (docElm.requestFullscreen) {
+          docElm.requestFullscreen()
+        } else if (docElm.mozRequestFullScreen) {
+          docElm.mozRequestFullScreen()
+        } else if (docElm.webkitRequestFullScreen) {
+          docElm.webkitRequestFullScreen()
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen()
+        }
+        this.isfullScreen = false
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen()
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen()
+        }
+        this.isfullScreen = true
+      }
     }
   }
 };
@@ -175,10 +204,16 @@ export default {
   left: 80%;
   .el-avatar {
     margin-top: 18px;
+    margin-right: 18px;
   }
   .el-dropdown-link {
     cursor: pointer;
     color: #fff;
+    margin-right: 15px;
+  }
+  .el-tooltip{
+      margin-top: 17px;
+      margin-right: 10px;
   }
 }
 </style>

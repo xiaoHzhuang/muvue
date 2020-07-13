@@ -162,8 +162,9 @@ $leftright: ($left, $right);
     padding-#{$left}: 20px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
     margin-top: 6px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     li {
       height: 24px;
       line-height: 24px;
@@ -225,26 +226,6 @@ $leftright: ($left, $right);
     cursor: pointer;
     &:hover {
       background: #eee;
-    }
-  }
-}
-.menuBox {
-  margin: 0;
-  background: #fff;
-  z-index: 999;
-  position: absolute;
-  padding: 5px 0;
-  border: 1px solid #cccccc;
-  font-size: 12px;
-  font-weight: 400;
-  color: #333;
-  box-shadow: 2px 1px 6px 0 rgba(0, 0, 0, 0.3);
-  li {
-    margin: 0;
-    padding: 7px 16px;
-    @extend %cursor;
-    &:hover {
-      background: #e1e6ea;
     }
   }
 }

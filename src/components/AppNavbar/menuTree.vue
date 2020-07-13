@@ -1,16 +1,18 @@
 <template>
   <div>
-    <template v-for="(child) in menuData">
-      <el-submenu v-if="child.children.length > 0" :index="child.path">
+    <template v-for="(item) in menuData">
+      <!-- 展现本级及子级菜单项 -->
+      <el-submenu v-if="item.children.length > 0" :index="item.path" :key="item.path">
         <template slot="title">
-          <i :class="child.iconCls"></i>
-          <span slot="title">{{child.name}}</span>
+          <i :class="item.iconCls"></i>
+          <span slot="title">{{item.name}}</span>
         </template>
-        <menu-tree :menuData="child.children"></menu-tree>
+        <menu-tree :menuData="item.children"></menu-tree>
       </el-submenu>
-      <el-menu-item v-else-if="!child.hidden" :index="child.path">
-        <i :class="child.iconCls"></i>
-        <span slot="title">{{child.name}}</span>
+      <!-- 展现本级菜单项 -->
+      <el-menu-item v-else-if="!item.hidden" :index="item.path" :key="item.path">
+        <i :class="item.iconCls"></i>
+        <span slot="title">{{item.name}}</span>
       </el-menu-item>
     </template>
   </div>
@@ -24,11 +26,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    /*隐藏文字*/
-  .el-menu--collapse  .el-submenu__title span{
-    display: none;
-  }
-  .el-submenu__title span:not(.el-menu--collapse){
-    display: show;
-  }
+/*隐藏文字*/
+.el-menu--collapse .el-submenu__title span {
+  display: none;
+}
+.el-submenu__title span:not(.el-menu--collapse) {
+  display: show;
+}
 </style>

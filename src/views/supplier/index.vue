@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import supplierApi from '@/api/supplier'
+import supplierApi from '@/api/supplier/supplier'
 export default {
   data() {
     return {
