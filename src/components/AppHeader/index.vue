@@ -18,23 +18,11 @@
           @click-slide="handleClickSlide"
           @click-="handleClickSlide"
         >
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
-          </swiper-slide>
-          <swiper-slide style="width:80px">
-            <el-image style="width: 70px; height: 60px" :src="url"></el-image>
+          <swiper-slide style="width:80px" v-for="(item,index) in moduleList" :key="index">
+            <el-image
+              style="width: 70px; height: 60px"
+              :src="require('../../assets/images/modules/'+item.modulePic)"
+            ></el-image>
           </swiper-slide>
         </swiper>
       </div>
@@ -51,8 +39,8 @@
         </el-dropdown-menu>
       </el-dropdown>
       <el-avatar shape="square" :size="25" icon="el-icon-my-user" style="float:right"></el-avatar>
-      <el-tooltip class="item" effect="dark" content="全屏" placement="bottom"  style="float:right">
-        <i class="el-icon-my-fullscreen"  @click="fullScreen"></i>
+      <el-tooltip class="item" effect="dark" content="全屏" placement="bottom" style="float:right">
+        <i class="el-icon-my-fullscreen" @click="fullScreen"></i>
       </el-tooltip>
     </div>
   </el-header>
@@ -66,9 +54,19 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 export default {
   data() {
     return {
-      isfullScreen:true,
-      url:
-        "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+      isfullScreen: true,
+      moduleList: [
+        { modulePic: "module1.svg" },
+        { modulePic: "module2.svg" },
+        { modulePic: "module3.svg" },
+        { modulePic: "module4.svg" },
+        { modulePic: "module5.svg" },
+        { modulePic: "module6.svg" },
+        { modulePic: "module7.svg" },
+        { modulePic: "module8.svg" },
+        { modulePic: "module9.svg" },
+        { modulePic: "module10.svg" }
+      ],
       swiperOption: {
         // 每页展示几条数据
         slidesPerView: 4,
@@ -92,12 +90,16 @@ export default {
     };
   },
   components: { Swiper, SwiperSlide },
+  created() {
+    this.fetchModuleList();
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
     }
   },
   methods: {
+    fetchModuleList() {},
     collapse() {
       this.$store.dispatch("collapse");
     },
@@ -137,30 +139,30 @@ export default {
     rightClick() {
       this.swiper.slideNext();
     },
-    fullScreen(){
-            if (this.isfullScreen) {
-        var docElm = document.documentElement
+    fullScreen() {
+      if (this.isfullScreen) {
+        var docElm = document.documentElement;
         if (docElm.requestFullscreen) {
-          docElm.requestFullscreen()
+          docElm.requestFullscreen();
         } else if (docElm.mozRequestFullScreen) {
-          docElm.mozRequestFullScreen()
+          docElm.mozRequestFullScreen();
         } else if (docElm.webkitRequestFullScreen) {
-          docElm.webkitRequestFullScreen()
+          docElm.webkitRequestFullScreen();
         } else if (elem.msRequestFullscreen) {
-          elem.msRequestFullscreen()
+          elem.msRequestFullscreen();
         }
-        this.isfullScreen = false
+        this.isfullScreen = false;
       } else {
         if (document.exitFullscreen) {
-          document.exitFullscreen()
+          document.exitFullscreen();
         } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen()
+          document.mozCancelFullScreen();
         } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen()
+          document.webkitCancelFullScreen();
         } else if (document.msExitFullscreen) {
-          document.msExitFullscreen()
+          document.msExitFullscreen();
         }
-        this.isfullScreen = true
+        this.isfullScreen = true;
       }
     }
   }
@@ -211,9 +213,9 @@ export default {
     color: #fff;
     margin-right: 15px;
   }
-  .el-tooltip{
-      margin-top: 17px;
-      margin-right: 10px;
+  .el-tooltip {
+    margin-top: 17px;
+    margin-right: 10px;
   }
 }
 </style>

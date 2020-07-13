@@ -180,12 +180,10 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val;
-      console.log("handleSizeChange");
       this.fetchMemberList();
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-      console.log("handleCurrentChange");
       this.fetchMemberList();
     },
     resetForm(formName) {

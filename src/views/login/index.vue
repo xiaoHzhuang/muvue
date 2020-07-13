@@ -1,5 +1,11 @@
 <template>
   <div class="login-container">
+    <iframe
+      id="my-iframe"
+      src="./static/rainFlower.html"
+      frameborder="0"
+      :style="{height: frameHeight,width: frameWidth,position:framePosition}"
+    />
     <el-form ref="form" :model="form" :rules="rules" label-width="55px" class="login-form">
       <h1 class="login-title">后台管理系统</h1>
       <el-form-item label="账号" prop="username">
@@ -100,6 +106,9 @@ export default {
       }
     };
     return {
+      framePosition: "absolute",
+      frameHeight: "100%",
+      frameWidth: "100%",
       form: {
         username: "",
         password: ""
@@ -280,10 +289,13 @@ export default {
 <style scoped lang="scss">
 .login-form {
   width: 350px;
-  margin: 160px auto;
   padding: 30px;
   border-radius: 20px;
   background-color: rgb(255, 255, 255, 0.8);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .login-container {
   position: absolute;
