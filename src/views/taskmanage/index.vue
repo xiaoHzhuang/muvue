@@ -4,13 +4,7 @@
       <task-header></task-header>
     </el-header>
     <el-main>
-      <!-- <iframe
-        id="my-iframe"
-        src="./aa.html"
-        frameborder="0"
-        :style="{height: frameHeight,width: frameWidth}"
-      /> -->
-      <!-- <task-main></task-main> -->
+      <task-main></task-main>
     </el-main>
   </el-container>
 </template>
@@ -21,8 +15,6 @@ import TaskMain from "./taskmain.vue";
 export default {
   data() {
     return {
-      frameHeight: 100,
-      frameWidth: 100,
       orderFoodUrl: "@/views/taskmanage/aa.html"
     };
   },
