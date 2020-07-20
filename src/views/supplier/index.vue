@@ -113,6 +113,7 @@ export default {
       return (() => {
         let heightStyle = window.innerHeight - 200;
         this.tableHeight = heightStyle;
+        console.log("AAAA");
       })();
     };
   },

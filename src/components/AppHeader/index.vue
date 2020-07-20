@@ -18,10 +18,11 @@
           @click-slide="handleClickSlide"
           @click-="handleClickSlide"
         >
-          <swiper-slide style="width:80px" v-for="(item,index) in moduleList" :key="index">
+          <swiper-slide style="width:80px" v-for="(item,index) in moduleList"  :key="index">
             <el-image
               style="width: 70px; height: 60px"
-              :src="require('../../assets/images/modules/'+item.modulePic)"
+              :src="require('../../assets/images/modules/'+item.iconcls)"
+              @click="clickImage(item.id)"
             ></el-image>
           </swiper-slide>
         </swiper>
@@ -50,23 +51,13 @@
 import { logOut } from "@/api/login/login";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import headerApi from "@/api/appHeader/header";
 
 export default {
   data() {
     return {
       isfullScreen: true,
-      moduleList: [
-        { modulePic: "module1.svg" },
-        { modulePic: "module2.svg" },
-        { modulePic: "module3.svg" },
-        { modulePic: "module4.svg" },
-        { modulePic: "module5.svg" },
-        { modulePic: "module6.svg" },
-        { modulePic: "module7.svg" },
-        { modulePic: "module8.svg" },
-        { modulePic: "module9.svg" },
-        { modulePic: "module10.svg" }
-      ],
+      moduleList: [],
       swiperOption: {
         // 每页展示几条数据
         slidesPerView: 4,
@@ -83,7 +74,6 @@ export default {
         observeParents: true,
         on: {
           click: function(e) {
-            console.log(e);
           }
         }
       }
@@ -99,7 +89,17 @@ export default {
     }
   },
   methods: {
-    fetchModuleList() {},
+    fetchModuleList() {
+        headerApi.fetchModuleList().then(response => {
+          const respData=response.data;
+         if(respData.status){
+           this.moduleList=respData.data;
+         }
+        });
+    },
+    clickImage(moduleId){
+      console.log(moduleId);
+    },
     collapse() {
       this.$store.dispatch("collapse");
     },
@@ -112,7 +112,7 @@ export default {
             const resp = response.data;
             if (
               resp.status == -1 ||
-              resp.data.status == 401 ||
+              resp.data == 401 ||
               resp.data.status == 402
             ) {
               localStorage.removeItem("my-vue-token");
@@ -131,7 +131,6 @@ export default {
       }
     },
     handleClickSlide() {
-      console.log("A");
     },
     prevClick() {
       this.swiper.slidePrev();
