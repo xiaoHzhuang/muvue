@@ -18,7 +18,7 @@
           @click-slide="handleClickSlide"
           @click-="handleClickSlide"
         >
-          <swiper-slide style="width:80px" v-for="(item,index) in moduleList"  :key="index">
+          <swiper-slide style="width:80px" v-for="(item,index) in moduleList" :key="index">
             <el-image
               style="width: 70px; height: 60px"
               :src="require('../../assets/images/modules/'+item.iconcls)"
@@ -52,6 +52,7 @@ import { logOut } from "@/api/login/login";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import headerApi from "@/api/appHeader/header";
+import { menuNodeContainer } from "@/router/index";
 
 export default {
   data() {
@@ -61,6 +62,10 @@ export default {
       swiperOption: {
         // 每页展示几条数据
         slidesPerView: 4,
+        parallax: true,
+        autoplay: true,
+        reverseDirection: true,
+        speed: 100,
         // 每屏滚动几条数据
         slidesPerGroup: 4,
         spaceBetween: 0,
@@ -70,11 +75,22 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
+        effect: "cube",
+        cubeEffect: {
+          slideShadows: true,
+          shadow: true,
+          shadowOffset: 100,
+          shadowScale: 0.6
+        },
         observer: true,
         observeParents: true,
+        onSlideChangeEnd: function(swiper) {
+          swiper.update();
+          mySwiper.startAutoplay();
+          mySwiper.reLoop();
+        },
         on: {
-          click: function(e) {
-          }
+          click: function(e) {}
         }
       }
     };
@@ -90,15 +106,33 @@ export default {
   },
   methods: {
     fetchModuleList() {
-        headerApi.fetchModuleList().then(response => {
-          const respData=response.data;
-         if(respData.status){
-           this.moduleList=respData.data;
-         }
-        });
+      headerApi.fetchModuleList().then(response => {
+        const respData = response.data;
+        if (respData.status) {
+          this.moduleList = respData.data;
+        }
+      });
     },
-    clickImage(moduleId){
+    clickImage(moduleId) {
       console.log(moduleId);
+      headerApi.fetchMenuList(moduleId).then(response => {
+        this.reloadRouerMenu(response.data.data);
+      });
+    },
+    reloadRouerMenu(dataArray) {
+      const layoutNodeChild = [];
+      for (let i = 0; i < dataArray.length; i++) {
+        const menuNode = {
+          path: dataArray[i].path,
+          name: dataArray[i].name,
+          component: menuNodeContainer.get(dataArray[i].component),
+          iconCls: dataArray[i].iconcls,
+          meta: { title: dataArray[i].name },
+          children: []
+        };
+        layoutNodeChild.push(menuNode);
+      }
+      this.$store.dispatch("addRouters", layoutNodeChild);
     },
     collapse() {
       this.$store.dispatch("collapse");
@@ -130,8 +164,7 @@ export default {
           break;
       }
     },
-    handleClickSlide() {
-    },
+    handleClickSlide() {},
     prevClick() {
       this.swiper.slidePrev();
     },

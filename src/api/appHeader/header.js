@@ -8,10 +8,10 @@ export default {
             method:'get',
         })
     },
-    // fetchMenuList(moduleId){
-    //     return request({
-    //         url:`/routerModule/list?moduleId=`+moduleId,
-    //         method:'get',
-    //     })
-    // }
+    fetchMenuList(moduleId){
+        return request({
+            url:`/routerModule/list?moduleId=`+moduleId,
+            method:'get',
+        })
+    }
 }
