@@ -9,6 +9,7 @@ import Supplier from "@/views/supplier"
 import Goods from "@/views/goods"
 import Task from "@/views/taskmanage"
 import Recycle from "@/views/recyclePicture"
+import Carousel from "@/views/carousel"
 
 Vue.use(VueRouter);
 
@@ -127,15 +128,23 @@ const layOutDynamicChild = [{
       children: []
     },
   ]
-}]
-layOutRouter[0].children=layOutRouter[0].children.concat(layOutDynamicChild);
+}, {
+  path: "/carousel",
+  name: "走马灯",
+  component: Carousel,
+  iconCls: 'el-icon-help',
+  meta: { title: "走马灯" },
+  children: []
+}
+]
+layOutRouter[0].children = layOutRouter[0].children.concat(layOutDynamicChild);
 const defaultRouter = essentialRouters.concat(layOutRouter);
 
-const aa=[{
-  name:"name",
-  grades:[
+const aa = [{
+  name: "name",
+  grades: [
     {
-      math:90
+      math: 90
     }
   ]
 }]
@@ -147,4 +156,4 @@ const router = new VueRouter({
 });
 
 export default router;
-export { defaultRouter, menuNodeContainer,layOutRouter,essentialRouters,aa}
+export { defaultRouter, menuNodeContainer, layOutRouter, essentialRouters, aa }
