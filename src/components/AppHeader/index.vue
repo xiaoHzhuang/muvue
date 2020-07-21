@@ -18,7 +18,7 @@
           @click-slide="handleClickSlide"
           @click-="handleClickSlide"
         >
-          <swiper-slide style="width:80px" v-for="(item,index) in moduleList" :key="index">
+          <swiper-slide style="width:80px" v-for="(item,index) in moduleList"  :key="index">
             <el-image
               style="width: 70px; height: 60px"
               :src="require('../../assets/images/modules/'+item.iconcls)"
