@@ -2,7 +2,7 @@
   <div class="block">
     <span class="demonstration">默认 Hover 指示器触发</span>
     <el-carousel height="150px" indicator-position="outside"  type="card">
-      <el-carousel-item v-for="item in images" :key="item">
+      <el-carousel-item v-for="(item,index) in images" :key="index">
         <el-image
           style="width:100%; height: 60px"
           :src="require('../../assets/images/modules/'+item.iconcls)"

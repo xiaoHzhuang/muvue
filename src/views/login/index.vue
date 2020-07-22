@@ -302,7 +302,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: url("../../assets/login.jpg") no-repeat;
+  background: url("../../assets/login.png") no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
 }

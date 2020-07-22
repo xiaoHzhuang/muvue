@@ -52,7 +52,6 @@ import { logOut } from "@/api/login/login";
 import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import headerApi from "@/api/appHeader/header";
-import { menuNodeContainer } from "@/router/index";
 
 export default {
   data() {
@@ -114,7 +113,6 @@ export default {
       });
     },
     clickImage(moduleId) {
-      console.log(moduleId);
       headerApi.fetchMenuList(moduleId).then(response => {
         this.reloadRouerMenu(response.data.data);
       });
@@ -125,10 +123,6 @@ export default {
         const menuNode = {
           path: dataArray[i].path,
           name: dataArray[i].name,
-          component: menuNodeContainer.get(dataArray[i].component),
-          iconCls: dataArray[i].iconcls,
-          meta: { title: dataArray[i].name },
-          children: []
         };
         layoutNodeChild.push(menuNode);
       }
