@@ -2,36 +2,36 @@
   <el-header class="appHeader">
     <div class="leftContainer">
       <span class="hideAside" @click="collapse">
-        <i class="el-icon-my-collapse"></i>
+        <i class="el-icon-my-collapse" style="margin-top:18px"></i>
       </span>
       <span class="systemPic">
         <img class="logo" src="@/assets/logo.png" width="25px" />
-        <span class="company">管理系统</span>
+        <span style="color:white;font-size:15px">管理系统</span>
       </span>
     </div>
     <div class="moduleContainer">
       <div style="width:500px;margin:0 auto;height:60px">
-        <swiper
-          class="swiper"
-          ref="mySwiper"
-          :options="swiperOption"
-          @click-slide="handleClickSlide"
-          @click-="handleClickSlide"
-        >
-          <swiper-slide style="width:80px" v-for="(item,index) in moduleList"  :key="index">
+        <swiper class="swiper" ref="mySwiper" :options="swiperOption">
+          <swiper-slide
+            style="width:80px"
+            v-for="(item, index) in moduleList"
+            :key="index"
+          >
             <el-image
               style="width: 70px; height: 60px"
-              :src="require('../../assets/images/modules/'+item.iconcls)"
+              :src="require('../../assets/images/modules/' + item.iconcls)"
               @click="clickImage(item.id)"
             ></el-image>
           </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
     </div>
     <div class="rightContainer">
       <el-dropdown @command="handleCommand" style="float:right">
         <span class="el-dropdown-link">
-          {{$store.state.user.user}}
+          {{ $store.getters.user }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -39,8 +39,19 @@
           <el-dropdown-item command="b">退出系统</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-avatar shape="square" :size="25" icon="el-icon-my-user" style="float:right"></el-avatar>
-      <el-tooltip class="item" effect="dark" content="全屏" placement="bottom" style="float:right">
+      <el-avatar
+        shape="square"
+        :size="25"
+        icon="el-icon-my-user"
+        style="float:right"
+      ></el-avatar>
+      <el-tooltip
+        class="item"
+        effect="dark"
+        content="全屏"
+        placement="bottom"
+        style="float:right"
+      >
         <i class="el-icon-my-fullscreen" @click="fullScreen"></i>
       </el-tooltip>
     </div>
@@ -49,8 +60,8 @@
 
 <script>
 import { logOut } from "@/api/login/login";
-import "swiper/swiper-bundle.css";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 import headerApi from "@/api/appHeader/header";
 
 export default {
@@ -59,53 +70,36 @@ export default {
       isfullScreen: true,
       moduleList: [],
       swiperOption: {
-        // 每页展示几条数据
-        slidesPerView: 4,
-        parallax: true,
-        autoplay: true,
-        reverseDirection: true,
-        speed: 100,
-        // 每屏滚动几条数据
-        slidesPerGroup: 4,
-        spaceBetween: 0,
+        loop: true,
+        autoplay: false,
+        observer: true,
         grabCursor: true,
+        observeParents: true,
+        //每页展示几条数据
+        slidesPerView: 3,
+        //每屏滚动几条数据
+        slidesPerGroup: 4,
+        spaceBetween: 30,
         direction: "horizontal",
         navigation: {
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
+          prevEl: ".swiper-button-prev",
         },
-        effect: "cube",
-        cubeEffect: {
-          slideShadows: true,
-          shadow: true,
-          shadowOffset: 100,
-          shadowScale: 0.6
-        },
-        observer: true,
-        observeParents: true,
-        onSlideChangeEnd: function(swiper) {
-          swiper.update();
-          mySwiper.startAutoplay();
-          mySwiper.reLoop();
-        },
-        on: {
-          click: function(e) {}
-        }
-      }
+      },
     };
   },
-  components: { Swiper, SwiperSlide },
+  components: { swiper, swiperSlide },
   created() {
     this.fetchModuleList();
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
-    }
+    },
   },
   methods: {
     fetchModuleList() {
-      headerApi.fetchModuleList().then(response => {
+      headerApi.fetchModuleList().then((response) => {
         const respData = response.data;
         if (respData.status) {
           this.moduleList = respData.data;
@@ -113,8 +107,9 @@ export default {
       });
     },
     clickImage(moduleId) {
-      headerApi.fetchMenuList(moduleId).then(response => {
+      headerApi.fetchMenuList(moduleId).then((response) => {
         this.reloadRouerMenu(response.data.data);
+        this.$store.dispatch("removeAllTab", { router: this.$router });
       });
     },
     reloadRouerMenu(dataArray) {
@@ -136,20 +131,19 @@ export default {
         case "a":
           break;
         case "b":
-          logOut(localStorage.getItem("my-vue-token")).then(response => {
+          logOut(localStorage.getItem("my-vue-token")).then((response) => {
             const resp = response.data;
             if (
               resp.status == -1 ||
               resp.data == 401 ||
               resp.data.status == 402
             ) {
-              localStorage.removeItem("my-vue-token");
-              localStorage.removeItem("my-vue-user");
+              this.$store.dispatch("removeToken");
               this.$router.push("/login");
             } else {
               this.$message({
                 message: "注销失败",
-                type: "warning"
+                type: "warning",
               });
             }
           });
@@ -157,13 +151,6 @@ export default {
         default:
           break;
       }
-    },
-    handleClickSlide() {},
-    prevClick() {
-      this.swiper.slidePrev();
-    },
-    rightClick() {
-      this.swiper.slideNext();
     },
     fullScreen() {
       if (this.isfullScreen) {
@@ -190,8 +177,8 @@ export default {
         }
         this.isfullScreen = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -218,6 +205,14 @@ export default {
   width: 65%;
   height: 60px;
   left: 15%;
+  .swiper-button-next {
+    background: url(/static/images/rightArrow.svg) no-repeat;
+    margin-top: -17px;
+  }
+  .swiper-button-prev {
+    background: url(/static/images/leftArrow.svg) no-repeat;
+    margin-top: -17px;
+  }
   .swiper-slide {
     height: 60px;
     font-size: 50px;

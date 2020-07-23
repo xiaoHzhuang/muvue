@@ -1,8 +1,8 @@
 .el-icon-my-collapse{
     background: url(../images/myicon/collapse.svg) center no-repeat;
     background-size: cover;
-    width:16px;
-    height:16px;
+    width:24px;
+    height:24px;
 }
 .el-icon-my-export:before{
     content: "";

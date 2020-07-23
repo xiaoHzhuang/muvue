@@ -8,15 +8,21 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
-      :collapse-transition="false"
+      :collapse-transition="true"
       :unique-opened="true"
     >
-      <template v-for="(item) in $store.getters.routers" v-if="!item.hidden">
-        <!-- 展现本级及子级菜单项 -->
+    <!-- 
+      hidden的值解释
+      1：代表左侧导航不显示该菜单项，子菜单也不显示
+      2：代表左侧导航不显示该菜单项，但子菜单可能显示
+      0：代表左侧导航显示该菜单项及子菜单
+    -->
+      <template v-for="(item) in $store.getters.routers" v-if="item.hidden!==1">
+         <!-- 展现本级及子级菜单项 -->
         <el-submenu
-          v-if="!item.alone && !item.hidden && item.children.length>0"
+          v-if=" item.hidden===0 && item.children.length>0"
           :index="item.path"
-          :key="item.path"
+          :key="item.key"
         >
           <template slot="title">
             <i :class="item.iconCls"></i>
@@ -25,16 +31,14 @@
           <menu-tree :menuData="item.children"></menu-tree>
         </el-submenu>
         <!-- 不展现本级菜单项,仅展现子级菜单项 -->
-        <template
-          v-else-if="item.alone && item.children.length>0 && item.name==''"
+        <template 
+          v-else-if="item.hidden===2 && item.children.length>0 "
           :index="item.path"
         >
-          <menu-tree :menuData="item.children" :key="item.path"></menu-tree>
+          <menu-tree :menuData="item.children" :key="item.key"></menu-tree>
         </template>
-        <!-- 不展现本级菜单项及子级菜单项 -->
-        <template v-else-if="item.hidden" :index="item.path"></template>
         <!-- 没有子级菜单,仅展示本级菜单项 -->
-        <el-menu-item :index="item.path" v-else :key="item.path">
+        <el-menu-item  v-else :index="item.path"  :key="item.key">
           <i :class="item.iconCls"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>

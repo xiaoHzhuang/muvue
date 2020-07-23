@@ -1,11 +1,6 @@
 <template>
   <div class="login-container">
-    <iframe
-      id="my-iframe"
-      src="./static/rainFlower.html"
-      frameborder="0"
-      :style="{height: frameHeight,width: frameWidth,position:framePosition}"
-    />
+    <img :src="imgUrl" alt width="100%" height="100%" onload />
     <el-form ref="form" :model="form" :rules="rules" label-width="55px" class="login-form">
       <h1 class="login-title">后台管理系统</h1>
       <el-form-item label="账号" prop="username">
@@ -85,6 +80,7 @@ import Base64 from "@/utils/Base64";
 import util from "@/utils/util";
 
 export default {
+
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -106,9 +102,8 @@ export default {
       }
     };
     return {
-      framePosition: "absolute",
-      frameHeight: "100%",
-      frameWidth: "100%",
+      showPage:false,
+      imgUrl: require("../../assets/login.png"),
       form: {
         username: "",
         password: ""
@@ -241,7 +236,8 @@ export default {
           this.$store.dispatch("Login", formData).then(response => {
             if (response.status == 1) {
               this.$store.dispatch("initRoutes");
-              this.$router.push("/home");
+              debugger
+              this.$router.push("/");
             } else {
               this.$message({
                 message: response.msg,
@@ -293,6 +289,7 @@ export default {
   border-radius: 20px;
   background-color: rgb(255, 255, 255, 0.8);
   position: absolute;
+  z-index: 10;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -302,9 +299,12 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: url("../../assets/login.png") no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
+  img {
+    position: absolute;
+    z-index: 1;
+  }
 }
 .login-title {
   text-align: center;

@@ -3,12 +3,17 @@ const state = {
     isCollapse: false,
     logoShow: false,
     //当前导航栏中被选中的对象
-    currentNav: {},
+    currentNav: {
+        title: '首页',
+        path: '/home',
+        meta: { title: "首页" },
+    },
     //导航栏
     tabnavBox: [
         {
             title: '首页',
-            path: '/home'
+            path: '/home',
+            meta: { title: "首页" },
         }
     ]
 }
@@ -44,9 +49,11 @@ const mutations = {
             //优先选中后面的导航Tab
             let tabActive = state.tabnavBox[index] || state.tabnavBox[index - 1]
             arg.router.push(tabActive.path)
+            state.currentNav = tabActive;
         }
     },
     addTab(state, arg) {
+        state.currentNav = arg;
         for (let i = 0; i < state.tabnavBox.length; i++) {
             if (state.tabnavBox[i].path === arg.path) {
                 return;
@@ -63,7 +70,8 @@ const mutations = {
     removeOtherTab(state, arg) {
         state.tabnavBox = [{
             title: '首页',
-            path: '/home'
+            path: '/home',
+            meta: { title: "首页" },
         }]
         if (arg.all) {
             arg.router.push('/home')
@@ -71,7 +79,19 @@ const mutations = {
         }
         state.tabnavBox.push(arg.tabItem)
         arg.router.push(arg.tabItem.path)
+        state.currentNav = arg.tabItem;
     },
+    removeAllTab(state, arg) {
+        state.tabnavBox = [{
+            title: '首页',
+            path: '/home',
+            meta: { title: "首页" },
+        }]
+        if(state.currentNav.path=="/home"){
+            return;
+        }
+        arg.router.push('/home');
+    }
 }
 
 const actions = {
@@ -90,6 +110,9 @@ const actions = {
     removeOtherTab({ commit }, arg) {
         commit('removeOtherTab', arg)
     },
+    removeAllTab({ commit }, arg) {
+        commit('removeAllTab', arg)
+    }
 }
 
 export default {

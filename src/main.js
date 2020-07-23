@@ -11,7 +11,7 @@ import '@/router/permission';
 import '@/utils/commonJs';
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-import 'swiper/swiper-bundle.css'
+import 'swiper/dist/css/swiper.css';
 Vue.use(VueAwesomeSwiper);
 
 

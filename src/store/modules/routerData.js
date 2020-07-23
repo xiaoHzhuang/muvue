@@ -1,4 +1,4 @@
-import { defaultRouter } from "@/router/index"
+import { defaultRouter, addRouter } from "@/router/index"
 
 const state = {
     routers: [],// 所有有权限的路由表，用来生成菜单列表
@@ -6,26 +6,17 @@ const state = {
 }
 
 const mutations = {
-    setRouters: (state, routers) => {
-        state.addRouters = routers; // 保存动态路由用来addRouter
-        let container = new Set();
-        for (let router of routers) {
-            container.add(router.path);
-        }
-        for (let router of state.routers) {
-            if (router.path == "/") {
-                for (let childRouter of router.children) {
-                        if(container.has(childRouter.path)){
-                            childRouter.hidden=false;
-                        }else{
-                            childRouter.hidden=true;
-                        }
-                }
-            }
-        }
+    setRouters: (state) => {
+        state.addRouters = addRouter; // 保存动态路由用来addRouter
+        let tempDefaultRouters = [...defaultRouter];
+        let tempAddRouters=[...addRouter];
+        state.routers = tempDefaultRouters.concat(tempAddRouters); // 所有有权限的路由表，用来生成菜单列表
     },
     initRoutes: (state) => {
         state.routers = defaultRouter;
+    },
+    newRoutes: (state) => {
+        commit("setRouters")
     }
 }
 
@@ -35,11 +26,15 @@ const actions = {
     },
     initRoutes({ commit }) {
         commit('initRoutes');
+    },
+    newRoutes({ commit }) {
+        commit('setRouters');
     }
 }
 
 const getters = {
     routers: state => state.routers,
+    addRouters: state => state.addRouters,
 }
 
 export default {
