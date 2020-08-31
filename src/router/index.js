@@ -12,6 +12,7 @@ const Goods = () => import("@/views/goods")
 const Task = () => import("@/views/taskmanage")
 const Recycle = () => import("@/views/recyclePicture")
 const Carousel = () => import("@/views/carousel")
+const Kafka = () => import("@/views/kafka")
 
 /**
  * 重写路由的push方法,解决，相同路由跳转时，报错
@@ -144,6 +145,15 @@ let addRouter = [{
       key:12,
       iconCls: 'el-icon-help',
       meta: { title: "走马灯" },
+      children: []
+    }, {
+      path: "/kafka",
+      name: "消息中间件",
+      component: Kafka,
+      hidden: 0,
+      key:12,
+      iconCls: 'el-icon-help',
+      meta: { title: "消息中间件" },
       children: []
     }
   ]

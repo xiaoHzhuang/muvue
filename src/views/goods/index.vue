@@ -1,17 +1,17 @@
 <template>
   <div>
     <el-form ref="searchForm" :inline="true" :model="searchMap"  size="small" class="demo-form-inline searchForm">
-      <el-form-item prop="goodsname" style="width:150px">
-        <el-input v-model="searchMap.goodsname" placeholder="商品名称"></el-input>
+      <el-form-item prop="goodsName" style="width:150px">
+        <el-input v-model="searchMap.goodsName" placeholder="商品名称"></el-input>
       </el-form-item>
-      <el-form-item prop="goodscode" style="width:150px">
-        <el-input v-model="searchMap.goodscode" placeholder="商品编码"></el-input>
+      <el-form-item prop="goodsCode" style="width:150px">
+        <el-input v-model="searchMap.goodsCode" placeholder="商品编码"></el-input>
       </el-form-item>
-      <el-form-item prop="suppliername" style="width:150px">
+      <el-form-item prop="supplierName" style="width:150px">
         <el-input
           readonly
           @click.native="openSearchSupplierDialog"
-          v-model="searchMap.suppliername"
+          v-model="searchMap.supplierName"
           placeholder="供应商"
         ></el-input>
       </el-form-item>
@@ -23,13 +23,13 @@
     </el-form>
     <el-table :data="tableData" border style="width: 100%;" :height="tableHeight">
       <el-table-column type="index" label="序号" width="60"></el-table-column>
-      <el-table-column prop="goodsname" label="商品名称"></el-table-column>
-      <el-table-column prop="goodscode" label="商品编码"></el-table-column>
-      <el-table-column prop="goodssize" label="商品规格"></el-table-column>
-      <el-table-column prop="saleprice" label="零售价"></el-table-column>
-      <el-table-column prop="purchaseprice" label="进货价"></el-table-column>
+      <el-table-column prop="goodsName" label="商品名称"></el-table-column>
+      <el-table-column prop="goodsCode" label="商品编码"></el-table-column>
+      <el-table-column prop="goodsSize" label="商品规格"></el-table-column>
+      <el-table-column prop="salePrice" label="零售价"></el-table-column>
+      <el-table-column prop="purchasePrice" label="进货价"></el-table-column>
       <el-table-column prop="size" label="库存数量"></el-table-column>
-      <el-table-column prop="suppliername" label="供应商">
+      <el-table-column prop="supplierName" label="供应商">
         <template slot-scope="scope">{{scope.row.supplier.supplierName}}</template>
       </el-table-column>
       <el-table-column fixed="right" label="操作">
@@ -57,26 +57,26 @@
         label-width="100px"
         :rules="rules"
       >
-        <el-form-item prop="goodsname" label="商品名称">
-          <el-input v-model="goodsForm.goodsname" width="150px"></el-input>
+        <el-form-item prop="goodsName" label="商品名称">
+          <el-input v-model="goodsForm.goodsName" width="150px"></el-input>
         </el-form-item>
-        <el-form-item prop="goodscode" label="商品编码">
-          <el-input v-model="goodsForm.goodscode"></el-input>
+        <el-form-item prop="goodsCode" label="商品编码">
+          <el-input v-model="goodsForm.goodsCode"></el-input>
         </el-form-item>
-        <el-form-item prop="goodssize" label="商品规格">
-          <el-input v-model="goodsForm.goodssize"></el-input>
+        <el-form-item prop="goodsSize" label="商品规格">
+          <el-input v-model="goodsForm.goodsSize"></el-input>
         </el-form-item>
-        <el-form-item prop="saleprice" label="零售价">
-          <el-input v-model="goodsForm.saleprice"></el-input>
+        <el-form-item prop="salePrice" label="零售价">
+          <el-input v-model="goodsForm.salePrice"></el-input>
         </el-form-item>
-        <el-form-item prop="purchaseprice" label="进货价">
-          <el-input v-model="goodsForm.purchaseprice"></el-input>
+        <el-form-item prop="purchasePrice" label="进货价">
+          <el-input v-model="goodsForm.purchasePrice"></el-input>
         </el-form-item>
         <el-form-item prop="size" label="库存数量">
           <el-input v-model="goodsForm.size"></el-input>
         </el-form-item>
-        <el-form-item prop="suppliername" label="供应商">
-          <el-input readonly @click.native="openSupplierDialog" v-model="goodsForm.suppliername"></el-input>
+        <el-form-item prop="supplierName" label="供应商">
+          <el-input readonly @click.native="openSupplierDialog" v-model="goodsForm.supplierName"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -98,10 +98,10 @@ export default {
   data() {
     return {
       searchMap: {
-        goodsname: "",
-        goodscode: "",
-        suppliername: "",
-        supplierid: ""
+        goodsName: "",
+        goodsCode: "",
+        supplierName: "",
+        supplierId: ""
       },
       tableData: [],
       total: 0,
@@ -112,25 +112,28 @@ export default {
       rules: {},
       goodsForm:{
         id: "",
-        goodsname: "",
-        goodscode: "",
-        goodssize: "",
-        saleprice: "",
-        purchaseprice: "",
+        goodsName: "",
+        goodsCode: "",
+        goodsSize: "",
+        salePrice: "",
+        purchasePrice: "",
         size: "",
-        suppliername: "",
-        supplierid: ""
+        supplierName: "",
+        supplierId: ""
       },
       supplierDialogVisible: false,
       formAdd: false,
       formSearch: false,
       rules: {
-        goodsname: [
+        goodsName: [
           { required: true, message: "请输入商品名称", trigger: "blur" }
         ],
-        goodscode: [
+        goodsCode: [
           { required: true, message: "请输入商品代号", trigger: "blur" }
         ],
+        supplierName:[
+          { required: true, message: "请选择供应商", trigger: "blur" }
+        ]
       }
     };
   },
@@ -165,8 +168,8 @@ export default {
       goodsApi.getById(id).then(response => {
         console.log(response.data);
         this.goodsForm = response.data;
-        this.goodsForm.supplierid=response.data.supplier.id;
-        this.goodsForm.suppliername=response.data.supplier.supplierName;
+        this.goodsForm.supplierId=response.data.supplier.id;
+        this.goodsForm.supplierName=response.data.supplier.supplierName;
       });
     },
     handleDeleteClick(id) {
@@ -225,13 +228,13 @@ export default {
     },
     optionSupplier(currentRow) {
       if (this.formSearch) {
-        this.searchMap.suppliername = currentRow.supplierName;
-        this.searchMap.supplierid = currentRow.id;
+        this.searchMap.supplierName = currentRow.supplierName;
+        this.searchMap.supplierId = currentRow.id;
         this.supplierDialogVisible = false;
         this.formSearch = false;
       } else {
-        this.goodsForm.suppliername = currentRow.supplierName;
-        this.goodsForm.supplierid = currentRow.id;
+        this.goodsForm.supplierName = currentRow.supplierName;
+        this.goodsForm.supplierId = currentRow.id;
         this.supplierDialogVisible = false;
         this.formAdd = false;
       }

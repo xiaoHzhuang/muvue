@@ -21,7 +21,8 @@ router.beforeEach((to, from, next) => {
         if (initMenuFlag) {
             //已经存在token并且左侧路由菜单已经初始化完毕，不允许跳转登录页面
             if (to.path === '/login' || to.path === '/register') {
-                next("/");
+                next();
+                // next("/");
             } else {
                 store.dispatch("addTab", {
                     title: title,
