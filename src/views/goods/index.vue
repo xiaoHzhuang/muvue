@@ -166,7 +166,6 @@ export default {
     handleEditClick(id) {
       this.openDialog();
       goodsApi.getById(id).then(response => {
-        console.log(response.data);
         this.goodsForm = response.data;
         this.goodsForm.supplierId=response.data.supplier.id;
         this.goodsForm.supplierName=response.data.supplier.supplierName;

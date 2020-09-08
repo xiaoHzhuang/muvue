@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "@/views/login"
-import Layout from "@/components/Layout"
-import Home from "@/views/home"
+import Login from "@/views/login";
+import Layout from "@/components/Layout";
+import Home from "@/views/home";
 
 //不是必须加载的组件使用懒加载
 const Member = () => import("@/views/member")
@@ -13,6 +13,8 @@ const Task = () => import("@/views/taskmanage")
 const Recycle = () => import("@/views/recyclePicture")
 const Carousel = () => import("@/views/carousel")
 const Kafka = () => import("@/views/kafka")
+const Arrangement = () => import("@/views/arrangement")
+const FileUpload = () => import("@/views/fileupload")
 
 /**
  * 重写路由的push方法,解决，相同路由跳转时，报错
@@ -154,6 +156,24 @@ let addRouter = [{
       key:12,
       iconCls: 'el-icon-help',
       meta: { title: "消息中间件" },
+      children: []
+    },{
+      path: "/arrangement",
+      name: "layout布局",
+      component: Arrangement,
+      hidden: 0,
+      key:12,
+      iconCls: 'el-icon-help',
+      meta: { title: "layout布局" },
+      children: []
+    },{
+      path: "/fileUpload",
+      name: "文件上传",
+      component: FileUpload,
+      hidden: 0,
+      key:12,
+      iconCls: 'el-icon-help',
+      meta: { title: "文件上传" },
       children: []
     }
   ]
