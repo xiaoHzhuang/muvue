@@ -236,6 +236,8 @@ export default {
           this.$store.dispatch("Login", formData).then(response => {
             if (response.status == 1) {
               this.$store.dispatch("initRoutes");
+              this.$store.dispatch("newRoutes");
+              this.$store.dispatch("initMenu");
               this.$router.push("/");
             } else {
               this.$message({

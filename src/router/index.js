@@ -15,6 +15,7 @@ const Carousel = () => import("@/views/carousel")
 const Kafka = () => import("@/views/kafka")
 const Arrangement = () => import("@/views/arrangement")
 const FileUpload = () => import("@/views/fileupload")
+const Accordion = () => import("@/views/accordion")
 
 /**
  * 重写路由的push方法,解决，相同路由跳转时，报错
@@ -174,6 +175,15 @@ let addRouter = [{
       key:12,
       iconCls: 'el-icon-help',
       meta: { title: "文件上传" },
+      children: []
+    },{
+      path: "/accordion",
+      name: "手风琴",
+      component: Accordion,
+      hidden: 0,
+      key:12,
+      iconCls: 'el-icon-help',
+      meta: { title: "手风琴" },
       children: []
     }
   ]
