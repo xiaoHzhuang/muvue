@@ -16,6 +16,7 @@ const Kafka = () => import("@/views/kafka")
 const Arrangement = () => import("@/views/arrangement")
 const FileUpload = () => import("@/views/fileupload")
 const Accordion = () => import("@/views/accordion")
+const Drawer = () => import("@/views/drawer")
 
 /**
  * 重写路由的push方法,解决，相同路由跳转时，报错
@@ -43,7 +44,7 @@ const defaultRouter = [
   {
     path: "/",
     name:"主页A",
-    redirect: "/home",
+    redirect: "/login",
     component: Layout,
     hidden: 2,//左侧导航不显示该菜单项，但子菜单可能显示
     key:2,
@@ -56,6 +57,14 @@ const defaultRouter = [
         hidden: 1,
         key:3,
         meta: { title: "首页" },
+        children: []
+      },
+      {
+        path: "/login",
+        name:"登录",
+        component: Login,
+        hidden: 1,//左侧导航不显示该菜单项，子菜单也不显示
+        key:1,
         children: []
       },
     ]
@@ -184,6 +193,15 @@ let addRouter = [{
       key:12,
       iconCls: 'el-icon-help',
       meta: { title: "手风琴" },
+      children: []
+    },{
+      path: "/drawer",
+      name: "Drawer",
+      component: Drawer,
+      hidden: 0,
+      key:13,
+      iconCls: 'el-icon-help',
+      meta: { title: "Drawer" },
       children: []
     }
   ]

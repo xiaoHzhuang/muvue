@@ -238,7 +238,7 @@ export default {
               this.$store.dispatch("initRoutes");
               this.$store.dispatch("newRoutes");
               this.$store.dispatch("initMenu");
-              this.$router.push("/");
+              this.$router.push("/home");
             } else {
               this.$message({
                 message: response.msg,

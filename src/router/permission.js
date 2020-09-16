@@ -16,7 +16,6 @@ router.beforeEach((to, from, next) => {
     //如果含有token信息
     else {
         let initMenuFlag = store.getters.initMenuFlag;
-        console.log("初始化左侧菜单："+initMenuFlag);
         //如果已经初始化菜单完毕
         if (initMenuFlag) {
             //已经存在token并且左侧路由菜单已经初始化完毕，不允许跳转登录页面

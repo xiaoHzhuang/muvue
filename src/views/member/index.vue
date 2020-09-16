@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-form ref="searchForm" :inline="true" :model="searchMap"  size="small" class="demo-form-inline searchForm">
+    <el-form
+      ref="searchForm"
+      :inline="true"
+      :model="searchMap"
+      size="small"
+      class="demo-form-inline searchForm"
+    >
       <el-form-item prop="cardNum" style="width:150px">
         <el-input v-model="searchMap.cardNum" placeholder="会员卡号"></el-input>
       </el-form-item>
@@ -26,33 +32,82 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item style="margin-left:150px">
-        <el-button type="primary" icon="el-icon-search" @click="fetchMemberList" width="50px">查询</el-button>
-        <el-button type="primary" icon="el-icon-search" @click="openDialog" width="50px">新增</el-button>
-        <el-button @click="resetForm('searchForm')" width="50px">重置</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          @click="fetchMemberList"
+          width="50px"
+          >查询</el-button
+        >
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          @click="openDialog"
+          width="50px"
+          >新增</el-button
+        >
+        <el-button @click="resetForm('searchForm')" width="50px"
+          >重置</el-button
+        >
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" border style="width: 100%;" :height="tableHeight">
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%;"
+      :height="tableHeight"
+    >
       <el-table-column type="index" label="序号" width="60"></el-table-column>
       <el-table-column prop="id" label="会员卡号" width="100"></el-table-column>
-      <el-table-column prop="memberName" label="会员姓名" width="80"></el-table-column>
-      <el-table-column prop="memberPhone" label="手机号码" width="120"></el-table-column>
-      <el-table-column prop="memberCredit" label="可用积分" width="80"></el-table-column>
-      <el-table-column prop="openCardMoney" label="开卡金额" width="80"></el-table-column>
+      <el-table-column
+        prop="memberName"
+        label="会员姓名"
+        width="80"
+      ></el-table-column>
+      <el-table-column
+        prop="memberPhone"
+        label="手机号码"
+        width="120"
+      ></el-table-column>
+      <el-table-column
+        prop="memberCredit"
+        label="可用积分"
+        width="80"
+      ></el-table-column>
+      <el-table-column
+        prop="openCardMoney"
+        label="开卡金额"
+        width="80"
+      ></el-table-column>
       <el-table-column prop="payType" label="支付类型" width="80">
         <template slot-scope="scope">
-          <span>{{scope.row.payType|payTypeFilter}}</span>
+          <span>{{ scope.row.payType | payTypeFilter }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="memberAddress" label="会员地址" width="80"></el-table-column>
+      <el-table-column
+        prop="memberAddress"
+        label="会员地址"
+        width="80"
+      ></el-table-column>
       <el-table-column prop="memberBirthday" label="会员生日">
         <template slot-scope="scope">
-          <span>{{scope.row.memberBirthday|dataFormat}}</span>
+          <span>{{ scope.row.memberBirthday | dataFormat }}</span>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="handleEditClick(scope.row.id)" type="text" size="small">编辑</el-button>
-          <el-button @click="handleDeleteClick(scope.row.id)" type="danger" size="small">删除</el-button>
+          <el-button
+            @click="handleEditClick(scope.row.id)"
+            type="text"
+            size="small"
+            >编辑</el-button
+          >
+          <el-button
+            @click="handleDeleteClick(scope.row.id)"
+            type="danger"
+            size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -100,7 +155,11 @@
           </el-select>
         </el-form-item>
         <el-form-item prop="memberBirthday" label="出生日期">
-          <el-date-picker type="date" v-model="memberForm.memberBirthday" value-format="yyyy-MM-dd"></el-date-picker>
+          <el-date-picker
+            type="date"
+            v-model="memberForm.memberBirthday"
+            value-format="yyyy-MM-dd"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -116,7 +175,7 @@ import memberApi from "@/api/member/member";
 const payTypeOptions = [
   { type: 1, name: "现金" },
   { type: 2, name: "微信" },
-  { type: 3, name: "支付宝" }
+  { type: 3, name: "支付宝" },
 ];
 export default {
   data() {
@@ -126,12 +185,12 @@ export default {
       currentPage: 1,
       pageSize: 10,
       searchMap: {
-        cardNum:"",
-        name:"",
-        payType:null,
-        birthday:null
+        cardNum: "",
+        name: "",
+        payType: null,
+        birthday: null,
       },
-      tableHeight: window.innerHeight -200,
+      tableHeight: window.innerHeight - 200,
       payTypeOptions: payTypeOptions,
       dialogFormVisible: false,
       memberForm: {
@@ -142,17 +201,17 @@ export default {
         openCardMoney: 0,
         memberAddress: "",
         payType: "",
-        memberBirthday: ""
+        memberBirthday: "",
       },
       rules: {
         name: [{ required: true, message: "请输入会员名称", trigger: "blur" }],
         payType: [
-          { required: true, message: "请输入支付类型", trigger: "blur" }
+          { required: true, message: "请输入支付类型", trigger: "blur" },
         ],
         birthday: [
-          { required: true, message: "请输入生日日期", trigger: "blur" }
-        ]
-      }
+          { required: true, message: "请输入生日日期", trigger: "blur" },
+        ],
+      },
     };
   },
   created() {
@@ -172,8 +231,7 @@ export default {
     fetchMemberList() {
       memberApi
         .search(this.currentPage, this.pageSize, this.searchMap)
-        .then(response => {
-        
+        .then((response) => {
           this.total = response.data.totalSize;
           this.tableData = response.data.content;
         });
@@ -191,7 +249,7 @@ export default {
     },
     handleEditClick(id) {
       this.openDialog();
-      memberApi.getMemberById(id).then(response => {
+      memberApi.getMemberById(id).then((response) => {
         this.memberForm = response.data;
       });
     },
@@ -199,14 +257,15 @@ export default {
       this.$confirm("此操作将永久删除记录, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-          memberApi.deleteById(id).then(response => {
-            if (response.data.code=="1") {
+        type: "warning",
+      })
+        .then(() => {
+          memberApi.deleteById(id).then((response) => {
+            if (response.data.code == "1") {
               this.fetchMemberList();
               this.$message({
                 type: "success",
-                message: "删除成功!"
+                message: "删除成功!",
               });
             }
           });
@@ -214,7 +273,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "已取消删除",
           });
         });
     },
@@ -227,9 +286,9 @@ export default {
       });
     },
     save() {
-      this.$refs["memberForm"].validate(valid => {
+      this.$refs["memberForm"].validate((valid) => {
         if (valid) {
-          memberApi.saveMember(this.memberForm).then(response => {
+          memberApi.saveMember(this.memberForm).then((response) => {
             var resp = response.data;
             if (resp.code) {
               this.fetchMemberList();
@@ -237,7 +296,7 @@ export default {
             } else {
               this.$message({
                 message: "保存失败",
-                type: "warning"
+                type: "warning",
               });
             }
           });
@@ -245,7 +304,7 @@ export default {
           return false;
         }
       });
-    }
+    },
   },
   filters: {
     payTypeFilter(type) {
@@ -261,8 +320,8 @@ export default {
     },
     dataFormat(fmt) {
       return new Date(fmt).Format("yyyy-MM-dd hh:mm:ss");
-    }
-  }
+    },
+  },
 };
 </script>
 
