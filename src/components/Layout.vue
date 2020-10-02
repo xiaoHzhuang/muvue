@@ -21,7 +21,7 @@ export default {
     return {};
   },
   components: { AppHeader, AppMain, AppNavbar },
-  methods: {}
+  methods: {},
 };
 </script>
 <style>
@@ -38,7 +38,7 @@ export default {
   transition: all 0.3s;
 }
 </style>
-<style scoped  lang="scss">
+<style scoped lang="scss">
 %h100 {
   height: 100%;
 }
@@ -64,25 +64,23 @@ body,
   @extend %h100;
   @extend %w100;
 }
+.appHeader {
+  line-height: 60px;
+  background-color: #545c64;
+  height: 60px;
+  width: 100%;
+}
 .navBar {
   width: auto !important;
   top: 0px;
   left: 0px;
   bottom: 0px;
-  height: 100%;
+  height:100%;
   overflow-y: auto;
   background-color: #545c64;
 }
 .container {
   position: relative;
-}
-
-.appHeader {
-  line-height: 60px;
-  background-color: #545c64;
-  // background-color: white;
-  height: 60px;
-  width: 100%;
 }
 
 .appMain {

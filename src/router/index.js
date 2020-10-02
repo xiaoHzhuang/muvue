@@ -21,6 +21,9 @@ const jointJsHello = () => import("@/views/jointJs/helloworld.vue");
 const jointJsLink = () => import("@/views/jointJs/link.vue");
 const jointJsElement = () => import("@/views/jointJs/element.vue");
 const jointJs = () => import("@/views/jointJs");
+const MxGraph = () => import("@/views/mxgraph");
+const MxGraphBasic = () => import("@/views/mxgraph/basic.vue");
+const MxGraphToolBar = () => import("@/views/mxgraph/toolbar.vue");
 /**
  * 重写路由的push方法,解决，相同路由跳转时，报错
  */
@@ -169,7 +172,7 @@ let addRouter = [
         name: "消息中间件",
         component: Kafka,
         hidden: 0,
-        key: 12,
+        key: 13,
         iconCls: "el-icon-help",
         meta: { title: "消息中间件" },
         children: [],
@@ -179,7 +182,7 @@ let addRouter = [
         name: "layout布局",
         component: Arrangement,
         hidden: 0,
-        key: 12,
+        key: 14,
         iconCls: "el-icon-help",
         meta: { title: "layout布局" },
         children: [],
@@ -189,7 +192,7 @@ let addRouter = [
         name: "文件上传",
         component: FileUpload,
         hidden: 0,
-        key: 12,
+        key: 15,
         iconCls: "el-icon-help",
         meta: { title: "文件上传" },
         children: [],
@@ -199,7 +202,7 @@ let addRouter = [
         name: "手风琴",
         component: Accordion,
         hidden: 0,
-        key: 12,
+        key: 16,
         iconCls: "el-icon-help",
         meta: { title: "手风琴" },
         children: [],
@@ -209,7 +212,7 @@ let addRouter = [
         name: "Drawer",
         component: Drawer,
         hidden: 0,
-        key: 13,
+        key: 17,
         iconCls: "el-icon-help",
         meta: { title: "Drawer" },
         children: [],
@@ -219,7 +222,7 @@ let addRouter = [
         name: "JointJs",
         component: jointJs,
         hidden: 0,
-        key: 13,
+        key: 18,
         iconCls: "el-icon-help",
         meta: { title: "JointJs" },
         children: [
@@ -228,7 +231,7 @@ let addRouter = [
             name: "JointJsHelloWorld",
             component: jointJsHello,
             hidden: 0,
-            key: 13,
+            key: 19,
             iconCls: "el-icon-help",
             meta: { title: "JointJsHelloWorld" },
             children: [],
@@ -238,7 +241,7 @@ let addRouter = [
             name: "JointJsElement",
             component: jointJsElement,
             hidden: 0,
-            key: 13,
+            key: 20,
             iconCls: "el-icon-help",
             meta: { title: "JointJsElement" },
             children: [],
@@ -248,11 +251,42 @@ let addRouter = [
             name: "JointJsLink",
             component: jointJsLink,
             hidden: 0,
-            key: 13,
+            key: 21,
             iconCls: "el-icon-help",
             meta: { title: "JointJsLink" },
             children: [],
           },
+        ],
+      },
+      {
+        path: "/mxGraph",
+        name: "MxGraph",
+        component: MxGraph,
+        hidden: 0,
+        key: 22,
+        iconCls: "el-icon-help",
+        meta: { title: "MxGraph" },
+        children: [
+          {
+            path: "/mxGraphBasic",
+            name: "MxGraphBasic",
+            component: MxGraphBasic,
+            hidden: 0,
+            key: 23,
+            iconCls: "el-icon-help",
+            meta: { title: "MxGraphBasic" },
+            children: [],
+          },
+          {
+            path: "/mxGraphToolBar",
+            name: "MxGraphToolBar",
+            component: MxGraphToolBar,
+            hidden: 0,
+            key: 24,
+            iconCls: "el-icon-help",
+            meta: { title: "MxGraphToolBar" },
+            children: [],
+          }
         ],
       },
     ],
