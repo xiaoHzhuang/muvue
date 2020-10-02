@@ -1,9 +1,9 @@
 <template>
   <div id="layout">
-    <el-container style="min-width:1200px">
+    <el-container>
       <app-navbar></app-navbar>
-      <el-container class="container" style="min-width:1000px">
-        <app-header></app-header>
+      <el-container class="container">
+        <app-header ></app-header>
         <transition name="main" mode="out-in">
           <app-main></app-main>
         </transition>
@@ -63,31 +63,33 @@ body,
 .el-container {
   @extend %h100;
   @extend %w100;
+  min-width: 1200px;
 }
 .appHeader {
   line-height: 60px;
-  background-color: #545c64;
   height: 60px;
   width: 100%;
-}
-.navBar {
-  width: auto !important;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  height:100%;
-  overflow-y: auto;
   background-color: #545c64;
 }
 .container {
   position: relative;
+  min-width: 1000px;
 }
+// .navBar {
+//   width: auto !important;
+//   top: 0px;
+//   bottom: 0px;
+//   left: 0px;
+//   height: 100%;
+//   overflow-y: auto;
+//   background-color: "#545c64";
+// }
 
 .appMain {
   position: absolute;
   top: 60px;
-  right: 0;
-  left: 0px;
   bottom: 0px;
+  left: 0px;
+  right: 0;
 }
 </style>
