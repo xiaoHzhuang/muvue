@@ -9,7 +9,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = process.env.NODE_ENV === 'production';
 import '@/router/permission';
 import '@/utils/commonJs';
-
+import i18n from './i18n/i18n';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
 Vue.use(VueAwesomeSwiper);
@@ -18,6 +18,7 @@ Vue.use(VueAwesomeSwiper);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App),
   created() {
   }

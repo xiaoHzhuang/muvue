@@ -29,31 +29,40 @@
       </div>
     </div>
     <div class="rightContainer">
-      <el-dropdown @command="handleCommand" style="float:right">
-        <span class="el-dropdown-link">
-          {{ $store.getters.user }}
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="a">修改密码</el-dropdown-item>
-          <el-dropdown-item command="b">退出系统</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <el-avatar
-        shape="square"
-        :size="25"
-        icon="el-icon-my-user"
-        style="float:right"
-      ></el-avatar>
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="全屏"
-        placement="bottom"
-        style="float:right"
-      >
-        <i class="el-icon-my-fullscreen" @click="fullScreen"></i>
-      </el-tooltip>
+      <ul class="personal">
+        <li style="margin-left:-20px;">
+          <el-tooltip
+            class="item"
+            effect="dark"
+            content="全屏"
+            placement="bottom"
+          >
+            <i class="el-icon-my-fullscreen" @click="fullScreen"></i>
+          </el-tooltip>
+        </li>
+        <li>
+          <langSelect></langSelect>
+        </li>
+        <li>
+          <el-avatar
+            shape="square"
+            :size="25"
+            icon="el-icon-my-user"
+          ></el-avatar>
+        </li>
+        <li>
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              {{ $store.getters.user }}
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="a">修改密码</el-dropdown-item>
+              <el-dropdown-item command="b">退出系统</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </li>
+      </ul>
     </div>
   </el-header>
 </template>
@@ -63,6 +72,7 @@ import { logOut } from "@/api/login/login";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import headerApi from "@/api/appHeader/header";
+import langSelect from "../../views/lang/langSelect";
 
 export default {
   data() {
@@ -88,7 +98,7 @@ export default {
       },
     };
   },
-  components: { swiper, swiperSlide },
+  components: { swiper, swiperSlide, langSelect },
   created() {
     this.fetchModuleList();
   },
@@ -225,18 +235,28 @@ export default {
   width: 20%;
   height: 60px;
   left: 80%;
+  .personal {
+    list-style-type: none;
+    height: 35px;
+    li {
+      display: inline;
+      line-height: 35px;
+      float: left;
+      margin-right: 10px;
+    }
+  }
   .el-avatar {
-    margin-top: 18px;
-    margin-right: 18px;
+    margin-top: 5px;
   }
   .el-dropdown-link {
     cursor: pointer;
     color: #fff;
-    margin-right: 15px;
   }
   .el-tooltip {
-    margin-top: 17px;
-    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .el-dropdown {
+    height: 30px;
   }
 }
 </style>
