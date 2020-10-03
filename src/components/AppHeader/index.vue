@@ -6,7 +6,7 @@
       </span>
       <span class="systemPic">
         <img class="logo" src="@/assets/logo.png" width="25px" />
-        <span style="color:white;font-size:15px">管理系统</span>
+        <span style="color:white;font-size:15px">{{ $t(`leftHeaderContainer.appName`) }}</span>
       </span>
     </div>
     <div class="moduleContainer">

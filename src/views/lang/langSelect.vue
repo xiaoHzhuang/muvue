@@ -25,6 +25,7 @@
     methods: {
       handleSetLanguage (lang) {
         this.$i18n.locale = lang
+        console.log(this.$i18n.locale)
         localStorage.setItem('lang', lang)
         this.getLanguage(lang)
       },

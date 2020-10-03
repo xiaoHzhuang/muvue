@@ -49,7 +49,9 @@ const cn = {
     changePassword: '修改密码',
     logout: '退出'
   },
-
+  leftHeaderContainer:{
+      appName:'管理系统',
+  },
   ...zhLocale   //  合并element-ui内置翻译
 }
 
