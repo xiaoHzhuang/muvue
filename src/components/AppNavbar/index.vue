@@ -85,7 +85,6 @@ export default {
 }
 .navBar::-webkit-scrollbar {
   width: 4px;
-  /*height: 4px;*/
 }
 .navBar::-webkit-scrollbar-thumb {
   border-radius: 10px;

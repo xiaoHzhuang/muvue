@@ -31,7 +31,7 @@ a {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.1s ease;
+  transition: all 0.3s ease;
 }
 
 .fade-enter,

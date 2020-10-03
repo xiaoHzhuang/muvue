@@ -3,7 +3,7 @@
     <el-container>
       <app-navbar></app-navbar>
       <el-container class="container">
-        <app-header ></app-header>
+        <app-header></app-header>
         <transition name="main" mode="out-in">
           <app-main></app-main>
         </transition>
@@ -49,47 +49,29 @@ export default {
   margin: 0px;
   padding: 0px;
 }
-body {
-  background-color: #f2f2f2;
-  font-size: 14px;
-  color: #333333;
-  @extend %h100;
-  @extend %w100;
-}
 
-html,
-body,
 #layout,
 .el-container {
   @extend %h100;
   @extend %w100;
   min-width: 1200px;
 }
-.appHeader {
-  line-height: 60px;
-  height: 60px;
-  width: 100%;
-  background-color: #545c64;
-}
+
 .container {
   position: relative;
   min-width: 1000px;
-}
-// .navBar {
-//   width: auto !important;
-//   top: 0px;
-//   bottom: 0px;
-//   left: 0px;
-//   height: 100%;
-//   overflow-y: auto;
-//   background-color: "#545c64";
-// }
-
-.appMain {
-  position: absolute;
-  top: 60px;
-  bottom: 0px;
-  left: 0px;
-  right: 0;
+  .appHeader {
+    line-height: 60px;
+    height: 60px;
+    width: 100%;
+    background-color: #545c64;
+  }
+  .appMain {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    left: 0px;
+    right: 0;
+  }
 }
 </style>

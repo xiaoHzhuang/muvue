@@ -49,7 +49,7 @@ const defaultRouter = [
   },
   {
     path: "/",
-    name: "主页A",
+    name: "主页",
     redirect: "/login",
     component: Layout,
     hidden: 2, //左侧导航不显示该菜单项，但子菜单可能显示
