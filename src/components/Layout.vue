@@ -72,6 +72,7 @@ export default {
     bottom: 0px;
     left: 0px;
     right: 0;
+    overflow: hidden;
   }
 }
 </style>

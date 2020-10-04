@@ -1,7 +1,9 @@
 <template>
   <el-main class="appMain">
     <app-link></app-link>
-    <router-view></router-view>
+    <transition name="main" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </el-main>
 </template>
 
@@ -14,9 +16,21 @@ export default {
 
   components: { AppLink },
 
-  methods: {}
+  methods: {},
 };
 </script>
+<style>
+  .main-enter, .main-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
 
-<style scoped>
+  }
+  .main-enter-active {
+    transition: all 0.2s;
+  }
+  .main-leave-active {
+    position: absolute;
+    transition: all 0.3s;
+  }
 </style>
+<style scoped></style>
