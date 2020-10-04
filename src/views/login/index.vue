@@ -2,7 +2,7 @@
   <div class="login-container">
     <img :src="imgUrl" alt width="100%" height="100%" onload />
     <el-form ref="form" :model="form" :rules="rules" label-width="55px" class="login-form">
-      <h1 class="login-title">后台管理系统</h1>
+      <h1 class="login-title">管理系统</h1>
       <el-form-item label="账号" prop="username">
         <el-input v-model="form.username" placeholder="请输入账号"></el-input>
       </el-form-item>

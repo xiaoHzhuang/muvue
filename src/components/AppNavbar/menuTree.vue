@@ -9,7 +9,7 @@
       >
         <template slot="title">
           <i :class="item.iconCls"></i>
-          <span slot="title">{{ item.name }}</span>
+          <span slot="title">{{ $t(`routeName.${item.name}`) }}</span>
         </template>
         <menu-tree :menuData="item.children"></menu-tree>
       </el-submenu>
@@ -23,7 +23,7 @@
       <!-- 展现本级菜单项 -->
       <el-menu-item v-else :index="item.path" :key="item.path">
         <i :class="item.iconCls"></i>
-        <span slot="title">{{ item.name }}</span>
+        <span slot="title">{{ $t(`routeName.${item.name}`) }}</span>
       </el-menu-item>
     </template>
   </div>

@@ -1,58 +1,34 @@
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+import zhLocale from "element-ui/lib/locale/lang/zh-CN";
 const cn = {
   routeName: {
-    home: '主页',
-    article: '文章管理',
-    publishArticle: '发表文章',
-    publishArticleEditor: '发表文章-富文本',
-    icon: '图标',
-    builtInIcon: '内置图标',
-    shuttleBox: '穿梭框',
-    demoShuttle: '穿梭框demo',
-    permissions: '权限管理',
-    pageControl: '页面权限',
-    btnControl: '按钮权限',
-    table: '表格',
-    multiDataTable: '多选数据表格',
-    filterTable: '筛选表格',
-    dragSort: '拖拽排序',
-    upload: '上传',
-    fileUpload: '文件上传',
-    editor: '编辑器',
-    markdown: 'markdown',
-    wangeditor: 'wangeditor',
-    multiDirectory: '多级目录',
-    'menu2-1': '二级-1',
-    'menu2-2': '二级-2',
-    'menu2-3': '二级-3',
-    'menu3-1': '三级-1',
-    'menu3-2': '三级-2',
-    'menu3-3': '三级-3',
-    'menu4-1': '四级-1',
-    'menu4-2': '四级-2',
-    'menu5-1': '五级-1',
-    systemSettings: '系统设置',
-    navMenu : '导航菜单',
+    login:'登录',
+    home: "主页",
+    staff: "员工管理",
+    supplier: "供应商管理",
+    goods: "商品管理",
+    member: "会员管理",
+    sidesShow: "轮播图",
+    task: "任务调度",
+    taskManage: "任务管理",
+    horseLamp: "走马灯",
+    message: "消息中间件",
+    layout: "layout布局",
+    fileUpload: "文件上传",
+    accordion: "手风琴",
+    drawer: "drawer",
+    jointJs: "jointJs",
+    jointJsHelloWorld: "jointJsHelloWorld",
+    jointJsElement: "jointJsElement",
+    jointJsLink: "jointJsLink",
+    mxGraph: "mxGraph",
+    mxGraphBasic: "mxGraphBasic",
+    mxGraphToolBar: "mxGraphToolBar",
   },
-  rightMenu: {
-    close: '关闭',
-    closeOther: '关闭其他',
-    closeAll: '全部关闭'
-  },
-  role: {
-    superAdmin: '超级管理员',
-    admin: '管理员',
-    ordinary: '普通用户'
-  },
-  userDropdownMenu: {
-    basicInfor: '基本资料',
-    changePassword: '修改密码',
-    logout: '退出'
-  },
-  leftHeaderContainer:{
-      appName:'管理系统',
-  },
-  ...zhLocale   //  合并element-ui内置翻译
-}
 
-export default cn
+  leftHeaderContainer: {
+    appName: "管理系统",
+  },
+  ...zhLocale, //  合并element-ui内置翻译
+};
+
+export default cn;

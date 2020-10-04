@@ -3,6 +3,7 @@ import store from '@/store/index';
 
 router.beforeEach((to, from, next) => {
     let title = to.meta.title;
+    console.log(title);
     let path = to.path;
     const token = store.getters.token;
     //如果没有token信息

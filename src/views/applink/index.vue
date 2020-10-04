@@ -9,7 +9,7 @@
           class="tabnav"
           :class="{ active: $route.path === item.path }"
         >
-          <router-link :to="item.path">{{ item.title }}</router-link>
+          <router-link :to="item.path">{{ $t(`routeName.${item.title}`) }}</router-link>
           <i @click="removeTab(item)" class="el-icon-error" v-if="index !== 0"></i>
         </li>
       </transition-group>
@@ -60,7 +60,7 @@ export default {
         router: this.$router
       });
     },
-    //首页导航Tab不允许弹出右键菜单选项
+    //导航Tab不允许弹出右键菜单选项
     isAffix(tag) {
       return tag.path == "/home";
     },

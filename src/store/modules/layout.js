@@ -4,16 +4,16 @@ const state = {
     logoShow: false,
     //当前导航栏中被选中的对象
     currentNav: {
-        title: '首页',
+        title: 'home',
         path: '/home',
-        meta: { title: "首页" },
+        meta: { title: "home" },
     },
     //导航栏
     tabnavBox: [
         {
-            title: '首页',
+            title: 'home',
             path: '/home',
-            meta: { title: "首页" },
+            meta: { title: "home" },
         }
     ]
 }
@@ -69,9 +69,9 @@ const mutations = {
     },
     removeOtherTab(state, arg) {
         state.tabnavBox = [{
-            title: '首页',
+            title: 'home',
             path: '/home',
-            meta: { title: "首页" },
+            meta: { title: "home" },
         }]
         if (arg.all) {
             arg.router.push('/home')
@@ -83,9 +83,9 @@ const mutations = {
     },
     removeAllTab(state, arg) {
         state.tabnavBox = [{
-            title: '首页',
+            title: 'home',
             path: '/home',
-            meta: { title: "首页" },
+            meta: { title: "home" },
         }]
         if(state.currentNav.path=="/home"){
             return;
